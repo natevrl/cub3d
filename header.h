@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 15:38:33 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:38:40 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ typedef struct s_mlx
 	int		win_height;
 	int		win_width;
 	int		is_player;
-	int		is_escape;
+	// int		is_escape;
 	void	*mlx;
 	void	*mlx_win;
 	t_img	*maps;
 	t_img	*player;
 	t_tuple	*walls;
-	t_tuple	*collectible;
-	t_tuple	*enemies;
+	// t_tuple	*collectible;
+	// t_tuple	*enemies;
 }	t_mlx;
 
 void	game_driver(char *path);

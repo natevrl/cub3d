@@ -1,6 +1,13 @@
 SRCS =	src/main.c \
+		src/initialisations.c \
 		src/kill.c \
-		src/error.c
+		src/map_parsing.c \
+		src/map_error.c \
+		src/map_put_tiles.c \
+		src/moove_detection.c \
+		src/player_moove.c \
+		libs/get_next_line/get_next_line.c\
+		libs/get_next_line/get_next_line_utils.c\
 
 
 
