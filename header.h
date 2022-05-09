@@ -6,13 +6,14 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 18:16:39 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/09 21:16:09 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
+# include <math.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -23,7 +24,24 @@
 # include "libs/get_next_line/get_next_line.h"
 # include "libs/libft/libft.h"
 
-# define IMG_BITS 32
+
+# define FALSE 0
+# define TRUE 1
+
+# define TILE_SIZE 64
+# define NUMBER_MAP_COLS 20
+# define NUMBER_MAP_ROWS 13
+# define WINDOW_WIDHT (NUMBER_MAP_COLS * TILE_SIZE)
+# define WINDOW_HEIGHT (NUMBER_MAP_ROWS * TILE_SIZE)
+
+# define  FOV_ANGLE (60 * PI / 180)
+# define NUMS_RAYS WINDOW_WIDTH
+
+
+# define FPS 30
+# define FRAME_TIME_LENGTH (1000 / FPS)
+# define PI 3.14159265
+# define DOUBLE_PI 6.28318530
 
 // code ascii des touches ZQSD (azerty)
 // # define UP 122
@@ -47,11 +65,20 @@ typedef struct s_img
 {
 	void	*img;
 	char	*r_path;
-	int		img_width;
-	int		img_height;
-	int		x;
-	int		y;
+	float	width;
+	float		height;
+	float		x;
+	float		y;
 	int		starting_position;
+	int		turn_direction; // -1 for left, +1 for right
+	int		walk_direction; // -1 for back, +1 for front
+	float	rotation_angle;
+	float	walk_speed;
+	float	turn_speed;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_img;
 
 typedef struct s_tuple
@@ -77,8 +104,12 @@ typedef struct s_mlx
 	// t_tuple	*enemies;
 }	t_mlx;
 
+
+// init
+void init_img_test(t_mlx *root);
 void	game_driver(char *path);
 void	kill_all(t_mlx *root);
+void	my_mlx_pixel_put(t_mlx *root, int x, int y, int color);
 
 // map & parsing
 void	number_of(t_mlx *root, char *str);
