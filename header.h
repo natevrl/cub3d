@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 16:38:40 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:16:39 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
-# include "./libs/minilibx-linux/mlx.h"
-// # include "../libs/get_next_line/get_next_line.h"
-# include "./libs/libft/libft.h"
+# include "libs/minilibx-linux/mlx.h"
+# include "libs/get_next_line/get_next_line.h"
+# include "libs/libft/libft.h"
 
 # define IMG_BITS 32
 

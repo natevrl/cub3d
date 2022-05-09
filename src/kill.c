@@ -1,52 +1,36 @@
 #include "../header.h"
 
-static void	kill_window(t_mlx *vars)
+static void	kill_window(t_mlx *root)
 {
-	if (vars->mlx)
+	if (root->mlx)
 	{
-		if (vars->player->img)
-			mlx_destroy_image(vars->mlx, vars->player->img);
-		if (vars->maps->img)
-			mlx_destroy_image(vars->mlx, vars->maps->img);
-		if (vars->mlx_win)
-			mlx_destroy_window(vars->mlx, vars->mlx_win);
-		mlx_destroy_display(vars->mlx);
+		if (root->player->img)
+			mlx_destroy_image(root->mlx, root->player->img);
+		if (root->maps->img)
+			mlx_destroy_image(root->mlx, root->maps->img);
+		if (root->mlx_win)
+			mlx_destroy_window(root->mlx, root->mlx_win);
+		mlx_destroy_display(root->mlx);
 	}
 }
 
-static void	kill_enemies(t_mlx *vars)
-{
-	if (vars->enemies->y)
-		free(vars->enemies->y);
-	if (vars->enemies->x)
-		free(vars->enemies->x);
-	if (vars->enemies)
-		free(vars->enemies);
-}
 
-void	kill_all(t_mlx *vars)
+void	kill_all(t_mlx *root)
 {
-	kill_window(vars);
-	if (vars->player)
-		free(vars->player);
-	if (vars->maps)
-		free(vars->maps);
-	if (vars->walls->y)
-		free(vars->walls->y);
-	if (vars->walls->x)
-		free(vars->walls->x);
-	if (vars->walls)
-		free(vars->walls);
-	if (vars->collectible->y)
-		free(vars->collectible->y);
-	if (vars->collectible->x)
-		free(vars->collectible->x);
-	if (vars->collectible)
-		free(vars->collectible);
-	kill_enemies(vars);
-	if (vars->mlx)
-		free(vars->mlx);
-	if (vars)
-		free(vars);
+	kill_window(root);
+	if (root->player)
+		free(root->player);
+	if (root->maps)
+		free(root->maps);
+	if (root->walls->y)
+		free(root->walls->y);
+	if (root->walls->x)
+		free(root->walls->x);
+	if (root->walls)
+		free(root->walls);
+	if (root->mlx)
+		free(root->mlx);
+	if (root)
+		free(root);
 	exit(0);
 }
