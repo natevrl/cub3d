@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/10 13:04:03 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/10 22:22:00 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	is_collectible(t_mlx *root, int x, int y);
 int		is_enemies(t_mlx *root, int x, int y);
 int		moove_player(int keycode, t_mlx *root);
 int		stop_player(int keycode, t_mlx *root);
-int update_player(t_mlx *root);
+int update_image(t_mlx *root);
 
 
 // put sprites

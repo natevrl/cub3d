@@ -2,6 +2,7 @@
 cub3D
 *.swp
 .DS_Store
+.vscode
 
 # Prerequisites
 *.d

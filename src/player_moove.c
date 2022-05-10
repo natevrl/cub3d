@@ -18,6 +18,7 @@ int	moove_player(int keycode, t_mlx *root)
 
 	if ((keycode == RIGHT || keycode == RIGHTA))
 		root->player->turn_direction += 1;
+		// root->player->x += 1;
 	if ((keycode == LEFT || keycode == LEFTA))
 		root->player->turn_direction -= 1;
 	if ((keycode == UP || keycode == UPA))
@@ -45,7 +46,7 @@ int	stop_player(int keycode, t_mlx *root)
 		root->player->walk_direction = 0;
 	if ((keycode == DOWN || keycode == DOWNA))
 		root->player->walk_direction = 0;
-	update_player(root);
+	update_image(root);
 	return (0);
 }
 
