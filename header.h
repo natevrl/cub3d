@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 21:16:09 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:04:03 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ int		is_escape(t_mlx *root, int x, int y);
 void	is_collectible(t_mlx *root, int x, int y);
 int		is_enemies(t_mlx *root, int x, int y);
 int		moove_player(int keycode, t_mlx *root);
+int		stop_player(int keycode, t_mlx *root);
+int update_player(t_mlx *root);
+
 
 // put sprites
 int		put_wall(t_mlx *root, int x, int y);
