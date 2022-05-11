@@ -34,11 +34,13 @@ static void	init_struct(t_mlx *root)
 	root->player->img = 0;
 	root->walls->y = 0;
 	root->walls->x = 0;
+	root->maps->width = WINDOW_WIDTH;
+	root->maps->height = WINDOW_HEIGHT;
 }
 
 void init_main_image(t_mlx *root)
 {
-	root->player->img = mlx_new_image(root->mlx, WINDOW_WIDHT, WINDOW_HEIGHT);
+	root->player->img = mlx_new_image(root->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	root->player->addr = mlx_get_data_addr(root->player->img, &root->player->bits_per_pixel, &root->player->line_length,
 								&root->player->endian);	
 }
@@ -51,13 +53,13 @@ int	init_player(t_mlx *root, int x, int y)
 	player = root->player;
 	player->x = x;
 	player->y = y;
-	player->height = 10;
-	player->width = 10;
+	player->height = 1;
+	player->width = 1;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
 	player->rotation_angle = PI / 2;
-	player->walk_speed = 50;
-	player->turn_speed = 45 * (PI / 180);
+	player->walk_speed = 0.2;
+	player->turn_speed = 0.2 * (PI / 180);
 
 
 	return (1);
@@ -75,19 +77,26 @@ void render_player(t_mlx *root)
 		while (++j < root->player->height)
 				mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + i, root->player->y + j, 0x00FF0000);
 	}
+	i = -1;
+	while (++i < 40)
+		mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + cos(root->player->rotation_angle) * i, root->player->y + sin(root->player->rotation_angle) * i, 0x00FF0000);
 }
 
+void move_player(t_mlx *root)
+{
+	root->player->rotation_angle += root->player->turn_direction * root->player->turn_speed;
+    float move_step = root->player->walk_direction * root->player->walk_speed;
+
+    float new_x = root->player->x + cos(root->player->rotation_angle) * move_step;
+    float new_y = root->player->y + sin(root->player->rotation_angle) * move_step;
+
+    root->player->x = new_x;
+    root->player->y = new_y;
+}
 
 int update_image(t_mlx *root) 
 {
-    root->player->rotation_angle += root->player->turn_direction * root->player->turn_speed;
-    float moveStep = root->player->walk_direction * root->player->walk_speed;
-
-    float newPlayerX = root->player->x + cos(root->player->rotation_angle) * moveStep;
-    float newPlayerY = root->player->y + sin(root->player->rotation_angle) * moveStep;
-
-    root->player->x = newPlayerX;
-    root->player->y = newPlayerY;
+	move_player(root);
 	mlx_put_image_to_window(root->mlx, root->mlx_win, root->player->img, 0, 0);
 	render_player(root);
 	return (1);
@@ -107,15 +116,15 @@ void	game_driver(char *path)
 	map_parsing(root, path);
 	malloc_tabs_of_xy(root);
 	root->mlx = mlx_init();
-	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDHT,
+	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
-	init_player(root, WINDOW_WIDHT / 2, WINDOW_HEIGHT / 2);
+	init_player(root, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	init_main_image(root);
-	// map_drawer(root, path);
-	mlx_hook(root->mlx_win, 2, 1L << 0, moove_player, root); // key press
-	mlx_hook(root->mlx_win, 3, 1L << 1, stop_player, root); // key release
-	mlx_hook(root->mlx_win, 17, 1L << 17, mlx_loop_end, root->mlx);
+	map_drawer(root, path);
+	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
+	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);
+	mlx_hook(root->mlx_win, 17, 1L << 17, mlx_loop_end, root->mlx);
 	mlx_loop(root->mlx);
 	// kill_all(root);
 }

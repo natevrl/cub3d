@@ -11,7 +11,7 @@
 
 
 
-int	moove_player(int keycode, t_mlx *root)
+int	press_actions(int keycode, t_mlx *root)
 {
 	if (keycode == 65307)
 		mlx_loop_end(root->mlx);
@@ -33,7 +33,7 @@ int	moove_player(int keycode, t_mlx *root)
 	return (0);
 }
 
-int	stop_player(int keycode, t_mlx *root)
+int	release_actions(int keycode, t_mlx *root)
 {
 	if (keycode == 65307)
 		mlx_loop_end(root->mlx);
@@ -50,7 +50,7 @@ int	stop_player(int keycode, t_mlx *root)
 	return (0);
 }
 
-// int	moove_player(int keycode, t_mlx *root)
+// int	press_actions(int keycode, t_mlx *root)
 // {
 // 	if (keycode == 65307)
 // 		mlx_loop_end(root->mlx);

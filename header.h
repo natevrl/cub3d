@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/10 22:22:00 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/11 22:18:42 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define TILE_SIZE 64
 # define NUMBER_MAP_COLS 20
 # define NUMBER_MAP_ROWS 13
-# define WINDOW_WIDHT (NUMBER_MAP_COLS * TILE_SIZE)
+# define WINDOW_WIDTH (NUMBER_MAP_COLS * TILE_SIZE)
 # define WINDOW_HEIGHT (NUMBER_MAP_ROWS * TILE_SIZE)
 
-# define  FOV_ANGLE (60 * PI / 180)
-# define NUMS_RAYS WINDOW_WIDTH
+# define FOV_ANGLE (60 * PI / 180)
+# define NUMBER_OF_RAYS WINDOW_WIDTH
 
 
 # define FPS 30
@@ -65,8 +65,8 @@ typedef struct s_img
 {
 	void	*img;
 	char	*r_path;
-	float	width;
-	float		height;
+	int	width;
+	int		height;
 	float		x;
 	float		y;
 	int		starting_position;
@@ -80,6 +80,19 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 }	t_img;
+
+typedef struct s_rays {
+    float ray_angle;
+    float wall_hit_x;
+    float wall_hit_y;
+    float distance;
+    int was_hit_vertical;
+    int is_ray_facing_up;
+    int is_ray_facing_down;
+    int is_ray_facing_left;
+    int is_ray_facing_right;
+    int wallHitContent;
+} t_rays[NUMBER_OF_RAYS];
 
 typedef struct s_tuple
 {
@@ -123,8 +136,8 @@ int		is_wall(t_mlx *root, int x, int y);
 int		is_escape(t_mlx *root, int x, int y);
 void	is_collectible(t_mlx *root, int x, int y);
 int		is_enemies(t_mlx *root, int x, int y);
-int		moove_player(int keycode, t_mlx *root);
-int		stop_player(int keycode, t_mlx *root);
+int		press_actions(int keycode, t_mlx *root);
+int		release_actions(int keycode, t_mlx *root);
 int update_image(t_mlx *root);
 
 
