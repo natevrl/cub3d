@@ -11,6 +11,7 @@ SRCS =	src/main.c \
 		src/utils.c \
 		src/error.c \
 		src/player_moove.c \
+		src/utils_tab.c	\
 
 
 

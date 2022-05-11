@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/10 22:22:00 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/11 12:49:33 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_mlx
 	int		win_height;
 	int		win_width;
 	int		is_player;
+	char	**data_map;
+	char	**map;
 	// int		is_escape;
 	void	*mlx;
 	void	*mlx_win;
@@ -147,6 +149,10 @@ int		free_return(char *str);
 
 //utils
 int		intstrlen(char *str);
+
+//utils_tab
+void	free_tab(char **tab);
+int		tab_len(char **tab);
 
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 10

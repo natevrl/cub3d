@@ -5,7 +5,8 @@ static int	isnot_cub(char *str)
 	size_t	begin;
 
 	begin = ft_strlen(str) - 4;
-	if (ft_strncmp(str + begin, ".cub", 4) != 0)
+	if (ft_strncmp(str + begin, ".cub", 4) != 0 || begin == 0
+		|| str[begin - 1] == '/')
 		return (1);
 	return (0);
 }

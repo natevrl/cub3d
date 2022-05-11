@@ -1,6 +1,6 @@
 #include "../header.h"
 
-static void	malloc_tabs_of_xy(t_mlx *root)
+/*static void	malloc_tabs_of_xy(t_mlx *root)
 {
 	root->walls->x = malloc(sizeof(int) * root->walls->max);
 	if (root->walls->x == 0)
@@ -8,7 +8,7 @@ static void	malloc_tabs_of_xy(t_mlx *root)
 	root->walls->y = malloc(sizeof(int) * root->walls->max);
 	if (root->walls->y == 0)
 		malloc_error(root);
-}
+}*/
 
 static void	malloc_struct(t_mlx *root)
 {
@@ -29,6 +29,7 @@ static void	init_struct(t_mlx *root)
 	root->walls->max = 0;
 	root->win_width = 0;
 	root->win_height = 0;
+	root->data_map = NULL;
 	root->mlx = 0;
 	root->player->img = 0;
 	root->player->img = 0;
@@ -105,8 +106,8 @@ void	game_driver(char *path)
 	malloc_struct(root);
 	init_struct(root);
 	map_parsing(root, path);
-	malloc_tabs_of_xy(root);
-	root->mlx = mlx_init();
+	//malloc_tabs_of_xy(root);
+	/*root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDHT,
 			WINDOW_HEIGHT, "cub3D");
 	init_player(root, WINDOW_WIDHT / 2, WINDOW_HEIGHT / 2);
@@ -116,6 +117,6 @@ void	game_driver(char *path)
 	mlx_hook(root->mlx_win, 3, 1L << 1, stop_player, root); // key release
 	mlx_hook(root->mlx_win, 17, 1L << 17, mlx_loop_end, root->mlx);
 	mlx_loop_hook(root->mlx, update_image, root);
-	mlx_loop(root->mlx);
-	// kill_all(root);
+	mlx_loop(root->mlx);*/
+	kill_all(root);
 }
