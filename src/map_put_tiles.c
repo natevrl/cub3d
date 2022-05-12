@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_put_tiles.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:40:45 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/11 22:24:04 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/12 15:27:12 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 int	put_wall(t_mlx *root, int x, int y)
 {
-	static int	f = -1;
+	// static int	f = -1;
 
-	root->walls->x[++f] = x;
-	root->walls->y[f] = y;
+	// printf("%d, %d\n", x, y);
+	// root->walls->x[++f] = x;
+	// root->walls->y[f] = y;
 	root->maps->r_path = "./images/rock.xpm";
 	root->maps->img = mlx_xpm_file_to_image(root->mlx, root->maps->r_path,
 			&root->maps->width, &root->maps->height);

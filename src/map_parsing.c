@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 18:38:24 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:28:04 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void	count_elements(t_mlx *root, char *buffer)
 	root->win_width = ((i + 1) - root->win_height) / root->win_height;
 }
 
-void	map_parsing(t_mlx *root, char *str)
+void	map_parsing(t_mlx *root)
 {
 	char	buffer[BUFF_SIZE];
 	char	*all_maps;
 	int		ret;
 	int		fd;
 
-	fd = open(str, O_RDONLY);
+	fd = open(root->path, O_RDONLY);
 	check_open_error(root, fd);
 	ret = 1;
 	all_maps = 0;

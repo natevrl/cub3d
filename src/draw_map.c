@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 23:44:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2022/05/11 22:12:12 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/12 15:23:42 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	draw(t_mlx *root, char *gnl)
 		// {
 		// 	if (!(put_player(root, x, y)))
 		// 		return (free_return(gnl));
-		// printf("YuP\n");
 		// }
 		x += TILE_SIZE;
 	}
@@ -43,14 +42,14 @@ static int	draw(t_mlx *root, char *gnl)
 }
 
 
-void	map_drawer(t_mlx *root, char *str)
+void	map_drawer(t_mlx *root)
 {
 	int		fd;
 	char	*gnl;
 	int		line;
 	int		error;
 
-	fd = open(str, O_RDONLY);
+	fd = open(root->path, O_RDONLY);
 	check_open_error(root, fd);
 	line = 0;
 	error = 0;

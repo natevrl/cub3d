@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/11 22:18:42 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/12 14:28:12 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "libs/minilibx-linux/mlx.h"
 # include "libs/get_next_line/get_next_line.h"
 # include "libs/libft/libft.h"
+
 
 
 # define FALSE 0
@@ -104,17 +105,16 @@ typedef struct s_tuple
 
 typedef struct s_mlx
 {
+	char	*path;
 	int		win_height;
 	int		win_width;
 	int		is_player;
-	// int		is_escape;
 	void	*mlx;
 	void	*mlx_win;
 	t_img	*maps;
 	t_img	*player;
 	t_tuple	*walls;
-	// t_tuple	*collectible;
-	// t_tuple	*enemies;
+	t_rays 	*rays;
 }	t_mlx;
 
 
@@ -126,13 +126,13 @@ void	my_mlx_pixel_put(t_mlx *root, int x, int y, int color);
 
 // map & parsing
 void	number_of(t_mlx *root, char *str);
-void	map_drawer(t_mlx *root, char *str);
-void	map_parsing(t_mlx *root, char *path);
+void	map_drawer(t_mlx *root);
+void	map_parsing(t_mlx *root);
 int     esc_code(int keycode, t_mlx *root);
 
 // player & detections
 void	compteur_de_pas(void);
-int		is_wall(t_mlx *root, int x, int y);
+int		there_is_wall(t_mlx *root, int x, int y);
 int		is_escape(t_mlx *root, int x, int y);
 void	is_collectible(t_mlx *root, int x, int y);
 int		is_enemies(t_mlx *root, int x, int y);
@@ -157,6 +157,10 @@ void	check_read_error(t_mlx *root, int ret, char *str);
 int		walls_error(t_mlx *root, int line, char *gnl);
 int		line_bad_len(t_mlx *root, char *gnl);
 int		free_return(char *str);
+
+// raycasting
+void render_rays(t_mlx *root);
+void raycast(t_mlx *root);
 
 //utils
 int		intstrlen(char *str);

@@ -23,8 +23,9 @@ static void	malloc_struct(t_mlx *root)
 		malloc_error(root);
 }
 
-static void	init_struct(t_mlx *root)
+static void	init_struct(t_mlx *root, char *path)
 {
+	root->path = path;
 	root->is_player = 0;
 	root->walls->max = 0;
 	root->win_width = 0;
@@ -65,6 +66,45 @@ int	init_player(t_mlx *root, int x, int y)
 	return (1);
 }
 
+const int map[NUMBER_MAP_ROWS][NUMBER_MAP_COLS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+
+int	draw_map(t_mlx *root)
+{
+	int			i;
+	int			j;
+	int			x;
+	static int	y = 0;
+
+	i = -1;
+	x = 0;
+	while (++i < NUMBER_MAP_ROWS)
+	{
+		j = -1;
+		while (++j < NUMBER_MAP_COLS)
+		{
+			if (map[i][j] == 1)
+				put_wall(root, x, y);
+			x += TILE_SIZE;
+		}
+	y += TILE_SIZE;
+	}
+	return (1);
+}
+
 void render_player(t_mlx *root)
 {
 	int i;
@@ -96,8 +136,14 @@ void move_player(t_mlx *root)
 
 int update_image(t_mlx *root) 
 {
+
 	move_player(root);
-	mlx_put_image_to_window(root->mlx, root->mlx_win, root->player->img, 0, 0);
+	// raycast(root);
+	// map_drawer(root);
+	draw_map(root);
+
+	// mlx_put_image_to_window(root->mlx, root->mlx_win, root->player->img, 0, 0);
+	// render_rays(root);
 	render_player(root);
 	return (1);
 }
@@ -112,15 +158,16 @@ void	game_driver(char *path)
 	if (root == 0)
 		malloc_error(root);
 	malloc_struct(root);
-	init_struct(root);
-	map_parsing(root, path);
+	init_struct(root, path);
+	map_parsing(root);
 	malloc_tabs_of_xy(root);
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
 	init_player(root, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	init_main_image(root);
-	map_drawer(root, path);
+
+	// printf("%d, %d\n", root->walls->x[0], root->walls->y[0]);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);

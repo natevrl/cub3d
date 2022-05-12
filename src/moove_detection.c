@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:46:37 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 18:17:36 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:23:48 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	compteur_de_pas(void)
 	i++;
 }
 
-int	is_wall(t_mlx *root, int x, int y)
+int	there_is_wall(t_mlx *root, int x, int y)
 {
 	int	i;
 

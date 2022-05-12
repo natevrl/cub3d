@@ -3,7 +3,7 @@
 
 // static int	ucango(t_mlx *root, int x, int y)
 // {
-// 	if (is_wall(root, x, y))
+// 	if (there_is_wall(root, x, y))
 // 		return (0);
 // 	compteur_de_pas();
 // 	return (1);
@@ -29,7 +29,6 @@ int	press_actions(int keycode, t_mlx *root)
 	// 	invalid_map_error(root, NULL);
 	// mlx_put_image_to_window(root->mlx, root->mlx_win, root->player->img,
 	// 	root->player->x, root->player->y);
-	printf("%d\n", root->player->turn_direction);
 	return (0);
 }
 
