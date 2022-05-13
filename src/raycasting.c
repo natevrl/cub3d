@@ -1,7 +1,5 @@
 #include "../header.h"
 
-#include <float.h>
-
 
 
 float normalize_ray(float angle)
@@ -88,13 +86,13 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
     xintercept += facing_right ? TILE_SIZE : 0;
 
     // Find the y-coordinate of the closest vertical grid intersection
-    yintercept = root->player->y + (xintercept - root->player->x) / tan(ray_angle);
+    yintercept = root->player->y + (xintercept - root->player->x) * tan(ray_angle);
 
     // Calculate the increment xstep and ystep
     xstep = TILE_SIZE;
     xstep *= facing_left ? -1 : 1;
 
-    ystep = TILE_SIZE / tan(ray_angle);
+    ystep = TILE_SIZE * tan(ray_angle);
     ystep *= (facing_up && ystep > 0) ? -1 : 1;
     ystep *= (facing_down && ystep < 0) ? -1 : 1;
 
@@ -172,13 +170,18 @@ void raycast(t_mlx *root)
 // dessine toutes les rays : du player jusqu'au premier mur touche
 void render_rays(t_mlx *root) 
 {
-    // float x = root->player->x - 1;
-    // float y = root->player->y - 1;
-    int j = -1;
+    int j;
     int i = -1;
     while (++i < NUMBER_OF_RAYS)
     {
-        while (++j < root->rays[0]->wall_hit_x && j < root->rays[0]->wall_hit_y)
-		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + j, root->player->y + j, 0x0000FF00);
+        // printf("%f. %f\n", root->rays[i]->wall_hit_x, root->rays[i]->wall_hit_y);
+        j = -1;
+        while (++j < root->rays[i]->wall_hit_x)
+		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + cos(root->player->rotation_angle) * j, root->player->y + sin(root->player->rotation_angle), 0x0000FF00);
+
+        j = -1;
+        while (++j < root->rays[i]->wall_hit_y)
+		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + cos(root->player->rotation_angle), root->player->y + sin(root->player->rotation_angle) * j, 0x0000FF00);
+        
     }
 }

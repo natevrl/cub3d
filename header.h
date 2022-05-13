@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/13 18:27:23 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/14 00:23:03 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define FALSE 0
 # define TRUE 1
 
+# define FLT_MAX 3.402823466e+38F
 # define TILE_SIZE 32
 # define NUMBER_MAP_COLS 20
 # define NUMBER_MAP_ROWS 13
@@ -122,7 +123,7 @@ typedef struct s_mlx
 void init_img_test(t_mlx *root);
 void	game_driver(char *path);
 void	kill_all(t_mlx *root);
-void	my_mlx_pixel_put(t_mlx *root, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 // map & parsing
 void	number_of(t_mlx *root, char *str);
