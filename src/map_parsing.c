@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/11 13:07:50 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/13 12:33:36 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static void	count_elements(t_mlx *root, char *buffer)
 	{
 		if (buffer[i] == '1')
 			root->walls->max++;
-		else if (buffer[i] == 'P')
+		else if (buffer[i] == 'N' || buffer[i] == 'S' || buffer[i] == 'E'
+				|| buffer[i] == 'W')
 			root->is_player++;
-		else if (buffer[i] != '\n' && buffer[i] != '0')
-			invalid_map_error(root, buffer);
 		if (buffer[i] == '\n' || buffer[i + 1] == '\0')
 			root->win_height++;
 		i++;
@@ -34,6 +33,7 @@ static void	count_elements(t_mlx *root, char *buffer)
 	if (root->is_player != 1)
 		invalid_map_error(root, buffer);
 	root->win_width = ((i + 1) - root->win_height) / root->win_height;
+	root->map1 = ft_split(buffer, '\n');
 }
 
 static void	up_data(t_mlx *root, char *line)
@@ -108,8 +108,10 @@ void	map_parsing(t_mlx *root, char *str)
 		buffer = get_next_line(fd);
 	}
 	count_elements(root, all_maps);
-	print_tab(root->data_map);
-	printf("%s", all_maps);
+	if (check_data(root->data_map) != 0)
+		data_error(root);
+	if (check_map(root->map1) != 0)
+		data_error(root);
 	free(all_maps);
 	close(fd);
 }

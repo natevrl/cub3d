@@ -20,6 +20,10 @@ void	kill_all(t_mlx *root)
 	kill_window(root);
 	if (root->data_map)
 		free_tab(root->data_map);
+	if (root->map1)
+		free_tab(root->map1);
+	if (root->map)
+		free_tab_int(root->map);
 	if (root->player)
 		free(root->player);
 	if (root->maps)

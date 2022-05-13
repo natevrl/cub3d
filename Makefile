@@ -4,15 +4,18 @@ SRCS =	src/main.c \
 		src/initialisations.c \
 		src/kill.c \
 		src/map_parsing.c \
+		src/map_parsing2.c \
 		src/map_error.c \
 		src/map_put_tiles.c \
 		src/draw_map.c \
 		src/moove_detection.c \
 		src/utils.c \
 		src/error.c \
+		src/error2.c	\
 		src/player_moove.c \
 		src/utils_tab.c	\
-
+		src/check_data.c	\
+		src/flood_fill.c \
 
 
 OBJS		= $(SRCS:.c=.o)

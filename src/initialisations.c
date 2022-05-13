@@ -106,6 +106,7 @@ void	game_driver(char *path)
 	malloc_struct(root);
 	init_struct(root);
 	map_parsing(root, path);
+	map_parsing2(root);
 	//malloc_tabs_of_xy(root);
 	/*root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDHT,

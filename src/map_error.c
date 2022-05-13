@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:33:44 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/09 18:11:54 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:29:34 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,11 @@ int	line_bad_len(t_mlx *root, char *gnl)
 		len--;
 	if (len != root->win_width && interupt == 1)
 		return (1);
+	return (0);
+}
+
+int	check_map(char **map)
+{
+	(void)map;
 	return (0);
 }

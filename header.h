@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/11 12:49:33 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/13 15:07:02 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,12 @@ typedef struct s_mlx
 	int		win_width;
 	int		is_player;
 	char	**data_map;
-	char	**map;
+	char	**map1;
+	int		**map;
+	int		x; //collone
+	int		y; //ligne
+	int		pos_p_x;
+	int		pos_p_y;
 	// int		is_escape;
 	void	*mlx;
 	void	*mlx_win;
@@ -117,7 +122,11 @@ void	my_mlx_pixel_put(t_mlx *root, int x, int y, int color);
 void	number_of(t_mlx *root, char *str);
 void	map_drawer(t_mlx *root, char *str);
 void	map_parsing(t_mlx *root, char *path);
+void	map_parsing2(t_mlx *root);
 int     esc_code(int keycode, t_mlx *root);
+int		check_data(char **data);
+int		check_map(char **map);
+int		flood_fill(t_mlx *root, int y, int x, int new_case);
 
 // player & detections
 void	compteur_de_pas(void);
@@ -127,7 +136,7 @@ void	is_collectible(t_mlx *root, int x, int y);
 int		is_enemies(t_mlx *root, int x, int y);
 int		moove_player(int keycode, t_mlx *root);
 int		stop_player(int keycode, t_mlx *root);
-int update_image(t_mlx *root);
+int 	update_image(t_mlx *root);
 
 
 // put sprites
@@ -146,6 +155,8 @@ void	check_read_error(t_mlx *root, int ret, char *str);
 int		walls_error(t_mlx *root, int line, char *gnl);
 int		line_bad_len(t_mlx *root, char *gnl);
 int		free_return(char *str);
+int		data_error(t_mlx *root);
+int		rgb_error(char **tab);
 
 //utils
 int		intstrlen(char *str);
@@ -153,6 +164,9 @@ int		intstrlen(char *str);
 //utils_tab
 void	free_tab(char **tab);
 int		tab_len(char **tab);
+void	free_tab_int(int **tab);
+
+void	print_tab(char **tab);
 
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 10

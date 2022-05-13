@@ -1,55 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_tab.c                                        :+:      :+:    :+:   */
+/*   error2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 12:45:58 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/13 12:47:14 by mderome          ###   ########.fr       */
+/*   Created: 2022/05/12 16:27:17 by mderome           #+#    #+#             */
+/*   Updated: 2022/05/12 16:44:39 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	tab_len(char **tab)
+int	data_error(t_mlx *root)
 {
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return (0);
-	while (tab && tab[i])
-		i++;
-	return (i);
+	perror("Error\ndata error");
+	kill_all(root);
+	return (1);
 }
 
-void	free_tab(char **tab)
+int	rgb_error(char **tab)
 {
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-}
-
-void	free_tab_int(int **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
+	perror("Error\nRGB error");
+	free_tab(tab);
+	return (1);
 }
