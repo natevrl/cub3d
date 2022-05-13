@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/12 14:28:12 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:27:23 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@
 # include "libs/get_next_line/get_next_line.h"
 # include "libs/libft/libft.h"
 
-
-
 # define FALSE 0
 # define TRUE 1
 
-# define TILE_SIZE 64
+# define TILE_SIZE 32
 # define NUMBER_MAP_COLS 20
 # define NUMBER_MAP_ROWS 13
 # define WINDOW_WIDTH (NUMBER_MAP_COLS * TILE_SIZE)
@@ -62,6 +60,8 @@
 # define LEFTA 65361
 # define RIGHTA 65363
 
+
+
 typedef struct s_img
 {
 	void	*img;
@@ -92,7 +92,7 @@ typedef struct s_rays {
     int is_ray_facing_down;
     int is_ray_facing_left;
     int is_ray_facing_right;
-    int wallHitContent;
+    float wallHitContent;
 } t_rays[NUMBER_OF_RAYS];
 
 typedef struct s_tuple
@@ -129,6 +129,7 @@ void	number_of(t_mlx *root, char *str);
 void	map_drawer(t_mlx *root);
 void	map_parsing(t_mlx *root);
 int     esc_code(int keycode, t_mlx *root);
+int mapHasWallAt(float x, float y);
 
 // player & detections
 void	compteur_de_pas(void);

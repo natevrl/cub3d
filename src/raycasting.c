@@ -3,6 +3,7 @@
 #include <float.h>
 
 
+
 float normalize_ray(float angle)
 {
 	angle = remainder(angle, DOUBLE_PI);
@@ -29,7 +30,7 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 	float xstep, ystep;
 
     // HORIZONTAL PART
-	int found_horrizontal_wall = FALSE;
+	int found_horrizontal_wall = 0;
 	float horizontal_wall_hit_x = 0;
 	float horizontal_wall_hit_y = 0;
 	float horizontal_wall_content = 0;
@@ -59,13 +60,13 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
         float xToCheck = nextHorzTouchX;
         float yToCheck = nextHorzTouchY + (facing_up ? -1 : 0);
         
-        if (there_is_wall(root, xToCheck, yToCheck)) 
+        if (mapHasWallAt(xToCheck, yToCheck)) 
 		{
             // found a wall hit
             horizontal_wall_hit_x = nextHorzTouchX;
             horizontal_wall_hit_y = nextHorzTouchY;
             horizontal_wall_content = 1;
-            found_horrizontal_wall = TRUE;
+            found_horrizontal_wall = 1;
             break;
         } 
 		else 
@@ -76,7 +77,7 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 	}
 
     // VERTICAL PART
-    int found_vertical_wall = FALSE;
+    int found_vertical_wall = 0;
 	float vertical_wall_hit_x = 0;
 	float vertical_wall_hit_y = 0;
 	float vertical_wall_content = 0;
@@ -106,13 +107,13 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
         float xToCheck = nextVertTouchX;
         float yToCheck = nextVertTouchY + (facing_left ? -1 : 0);
         
-        if (there_is_wall(root, xToCheck, yToCheck)) 
+        if (mapHasWallAt(xToCheck, yToCheck)) 
 		{
             // found a wall hit
             vertical_wall_hit_x = nextVertTouchX;
             vertical_wall_hit_y = nextVertTouchY;
             vertical_wall_content = 1;
-            found_vertical_wall = TRUE;
+            found_vertical_wall = 1;
             break;
         } 
 		else 
@@ -136,7 +137,7 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
         root->rays[id]->wall_hit_x = vertical_wall_hit_x;
         root->rays[id]->wall_hit_y = vertical_wall_hit_y;
         root->rays[id]->wallHitContent = vertical_wall_content;
-        root->rays[id]->was_hit_vertical = TRUE;
+        root->rays[id]->was_hit_vertical = 1;
     } 
     else 
     {
@@ -144,7 +145,7 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
         root->rays[id]->wall_hit_x = horizontal_wall_hit_x;
         root->rays[id]->wall_hit_y = horizontal_wall_hit_y;
         root->rays[id]->wallHitContent = horizontal_wall_content;
-        root->rays[id]->was_hit_vertical = FALSE;
+        root->rays[id]->was_hit_vertical = 0;
     }
     root->rays[id]->ray_angle = ray_angle;
     root->rays[id]->is_ray_facing_down = facing_down;
@@ -168,14 +169,16 @@ void raycast(t_mlx *root)
 }
 
 
-// dessinge toutes les rays : du player jusqu'au premier mur touche
+// dessine toutes les rays : du player jusqu'au premier mur touche
 void render_rays(t_mlx *root) 
 {
-    float x = root->player->x;
-    float y = root->player->y;
-    for (int i = 0; i < NUMBER_OF_RAYS; i++) 
+    // float x = root->player->x - 1;
+    // float y = root->player->y - 1;
+    int j = -1;
+    int i = -1;
+    while (++i < NUMBER_OF_RAYS)
     {
-        while (x < root->rays[i]->wall_hit_x && y < root->rays[i]->wall_hit_y)
-		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + x, root->player->y + y, 0x00FF0000);
+        while (++j < root->rays[0]->wall_hit_x && j < root->rays[0]->wall_hit_y)
+		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + j, root->player->y + j, 0x0000FF00);
     }
 }

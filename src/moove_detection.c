@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_detection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:46:37 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/12 13:23:48 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:09:57 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	compteur_de_pas(void)
 	i++;
 }
 
-int	there_is_wall(t_mlx *root, int x, int y)
-{
-	int	i;
+// int	there_is_wall(t_mlx *root, int x, int y)
+// {
+// 	int	i;
 
-	i = 0;
-	while (++i < root->walls->max)
-		if (x == root->walls->x[i] && y == root->walls->y[i])
-			return (1);
-	return (0);
-}
+// 	i = 0;
+// 	while (++i < root->walls->max)
+// 		if (x == root->walls->x[i] && y == root->walls->y[i])
+// 			return (1);
+// 	return (0);
+// }
+
