@@ -66,10 +66,7 @@ static void	init_struct(t_mlx *root, char *path)
 	root->maps->height = WINDOW_HEIGHT;
 }
 
-void init_rays(t_mlx *root)
-{
-	root->rays = malloc(sizeof(t_rays) * NUMBER_OF_RAYS);
-}
+
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -229,7 +226,6 @@ void	game_driver(char *path)
 			WINDOW_HEIGHT, "cub3D");
 	init_player(root, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	redraw(root);
-	init_rays(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);

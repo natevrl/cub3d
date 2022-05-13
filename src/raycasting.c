@@ -159,6 +159,7 @@ void raycast(t_mlx *root)
 
 	ray_angle = root->player->rotation_angle - (FOV_ANGLE / 2);
 	id = -1;
+	root->rays = malloc(sizeof(t_rays) * NUMBER_OF_RAYS + 1);
 	while (++id < NUMBER_OF_RAYS)
 	{
         cast_one_ray(root, ray_angle, id);
