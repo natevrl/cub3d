@@ -1,30 +1,30 @@
 #include "../header.h"
 
 
-int map[NUMBER_MAP_ROWS][NUMBER_MAP_COLS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
+// int map[NUMBER_MAP_ROWS][NUMBER_MAP_COLS] = {
+//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+// };
 
-int mapHasWallAt(float x, float y) 
+int mapHasWallAt(t_mlx *root, float x, float y) 
 {
     if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
         return TRUE;
     }
     int mapGridIndexX = floor(x / TILE_SIZE);
     int mapGridIndexY = floor(y / TILE_SIZE);
-    return map[mapGridIndexY][mapGridIndexX] != 0;
+    return root->map[mapGridIndexY][mapGridIndexX] != 0;
 }
 
 static void	malloc_tabs_of_xy(t_mlx *root)
@@ -53,8 +53,10 @@ static void	malloc_struct(t_mlx *root)
 static void	init_struct(t_mlx *root, char *path)
 {
 	root->path = path;
+
+	root->map = fill_map(root);
 	root->is_player = 0;
-	root->walls->max = 64;
+	root->walls->max = 100; // automatize max wall with parsing
 	root->win_width = 0;
 	root->win_height = 0;
 	root->mlx = 0;
@@ -110,7 +112,8 @@ int	draw_map(t_mlx *root)
 		x = 0;
 		while (++j < NUMBER_MAP_COLS)
 		{
-			if (map[i][j] == 1)
+
+			if (root->map[i][j] == '1')
 			{
 				put_rectangle(root, x, y);
 				// put_wall(root, x, y);
@@ -143,8 +146,8 @@ int	init_player(t_mlx *root, int x, int y)
 	player->turn_direction = 0;
 	player->walk_direction = 0;
 	player->rotation_angle = PI / 2;
-	player->walk_speed = 5;
-	player->turn_speed = 5 * (PI / 180);
+	player->walk_speed = 1;
+	player->turn_speed = 1 * (PI / 180);
 
 
 	return (1);
@@ -173,6 +176,7 @@ void draw_player(t_mlx *root)
 
 void redraw(t_mlx *root)
 {
+
 	t_img img;
 	img.img = mlx_new_image(root->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
@@ -201,10 +205,9 @@ int update_image(t_mlx *root)
 
 	move_player(root);
 	redraw(root);
-	raycast(root);
 
+	raycast(root);
 	render_rays(root);
-	// draw_player(root);
 	return (1);
 }
 
@@ -224,6 +227,7 @@ void	game_driver(char *path)
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
+
 	init_player(root, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	redraw(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press

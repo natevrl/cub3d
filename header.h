@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/14 00:23:03 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/14 19:00:59 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_tuple
 typedef struct s_mlx
 {
 	char	*path;
+	char 	**map;
 	int		win_height;
 	int		win_width;
 	int		is_player;
@@ -130,7 +131,8 @@ void	number_of(t_mlx *root, char *str);
 void	map_drawer(t_mlx *root);
 void	map_parsing(t_mlx *root);
 int     esc_code(int keycode, t_mlx *root);
-int mapHasWallAt(float x, float y);
+int mapHasWallAt(t_mlx *root, float x, float y);
+char	**fill_map(t_mlx *root);
 
 // player & detections
 void	compteur_de_pas(void);
