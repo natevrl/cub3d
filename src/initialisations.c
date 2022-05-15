@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialisations.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/15 15:14:58 by mderome           #+#    #+#             */
+/*   Updated: 2022/05/15 20:21:55 by mderome          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
 /*static void	malloc_tabs_of_xy(t_mlx *root)
@@ -107,6 +119,7 @@ void	game_driver(char *path)
 	init_struct(root);
 	map_parsing(root, path);
 	map_parsing2(root);
+	stock_data(root);
 	//malloc_tabs_of_xy(root);
 	/*root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDHT,

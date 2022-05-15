@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/12 17:04:06 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:39:11 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	check_data(char **data)
 	char	**info;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (!data)
 		return (1);
-	info = ft_split(data[i], ' ');
-	while (data[i])
+	info = ft_split(data[0], ' ');
+	while (data[++i])
 	{
 		if (ftstrlen(info[0]) == 2)
 		{
@@ -79,9 +79,30 @@ int	check_data(char **data)
 		}
 		else
 			return (free_tab(info), 1);
-		i++;
 		free_tab(info);
 		info = ft_split(data[i], ' ');
 	}
 	return (free_tab(info), 0);
+}
+
+int    parse_color(char *path)
+{
+    int        r;
+    int        g;
+    int        b;
+    int        converted_color;
+    char    **color;
+
+    color = ft_split(path, ',');
+    r = ft_atoi(color[0]);
+    g = ft_atoi(color[1]);
+    b = ft_atoi(color[2]);
+    converted_color = r << 16 | g << 8 | b;
+    return (converted_color);
+}
+
+void	stock_data(t_mlx *root)
+{
+	root->ceilling = parse_color(root->data_map[5]);
+	root->floor = parse_color(root->data_map[4]);
 }

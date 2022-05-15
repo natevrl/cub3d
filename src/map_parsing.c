@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/13 12:33:36 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/15 15:14:11 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	count_elements(t_mlx *root, char *buffer)
 		if (buffer[i] == '1')
 			root->walls->max++;
 		else if (buffer[i] == 'N' || buffer[i] == 'S' || buffer[i] == 'E'
-				|| buffer[i] == 'W')
+			|| buffer[i] == 'W')
 			root->is_player++;
 		if (buffer[i] == '\n' || buffer[i + 1] == '\0')
 			root->win_height++;
@@ -79,17 +79,6 @@ static char	*take_data(t_mlx *root, int fd)
 		line = get_next_line(fd);
 	}
 	return (line);
-}
-
-void	print_tab(char **tab)
-{
-	int	i = 0;
-
-	while (tab && tab[i])
-	{
-		printf("%s", tab[i]);
-		i++;
-	}
 }
 
 void	map_parsing(t_mlx *root, char *str)

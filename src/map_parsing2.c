@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:52 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/13 12:57:58 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/15 15:06:53 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	find_bigger_len(char **map)
 {
-	int	i;
+	int		i;
 	size_t	ret;
 	size_t	tmp;
 
@@ -32,7 +32,7 @@ static int	find_bigger_len(char **map)
 
 static void	set_space_and_1(t_mlx *root)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -60,7 +60,7 @@ static void	set_space_and_1(t_mlx *root)
 
 static void	set_all_at_3(t_mlx *root, int index)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < root->x)
@@ -87,17 +87,4 @@ void	map_parsing2(t_mlx *root)
 	set_space_and_1(root);
 	if (flood_fill(root, root->pos_p_y, root->pos_p_x, 0))
 		invalid_map_error(root, NULL);
-	int j = 0;
-	int	k;
-	while (j < root->y)
-	{
-		k = 0;
-		while (k < root->x)
-		{
-			printf("%d", root->map[j][k]);
-			k++;
-		}
-		printf("\n");
-		j++;
-	}
 }

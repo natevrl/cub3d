@@ -1,4 +1,16 @@
-# include "../header.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/15 15:09:12 by mderome           #+#    #+#             */
+/*   Updated: 2022/05/15 15:09:54 by mderome          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header.h"
 
 static int	isnot_cub(char *str)
 {
@@ -11,10 +23,9 @@ static int	isnot_cub(char *str)
 	return (0);
 }
 
-
 int	main(int ac, char **av)
 {
-    t_mlx	*root;
+	t_mlx	*root;
 
 	root = malloc(sizeof(t_mlx));
 	if (!root)

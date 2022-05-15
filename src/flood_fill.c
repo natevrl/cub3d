@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:52:59 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/13 15:28:27 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/15 15:08:17 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	check_fail(t_mlx *root, int y, int x)
 	return (0);
 }
 
-int	change_case(t_mlx *root, int y, int x, int new_case, int old_case)
+int	change_case(t_mlx *root, int y, int x, int new_case)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (root->map[y][x] == new_case || root->map[y][x] == 1)
@@ -37,16 +37,16 @@ int	change_case(t_mlx *root, int y, int x, int new_case, int old_case)
 	else
 	{
 		root->map[y][x] = new_case;
-		ret = change_case(root, y + 1, x, new_case, old_case);
+		ret = change_case(root, y + 1, x, new_case);
 		if (ret == 1)
 			return (ret);
-		ret = change_case(root, y - 1, x, new_case, old_case);
+		ret = change_case(root, y - 1, x, new_case);
 		if (ret == 1)
 			return (ret);
-		ret = change_case(root, y, x + 1, new_case, old_case);
+		ret = change_case(root, y, x + 1, new_case);
 		if (ret == 1)
 			return (ret);
-		ret = change_case(root, y, x - 1, new_case, old_case);
+		ret = change_case(root, y, x - 1, new_case);
 		if (ret == 1)
 			return (ret);
 	}
@@ -55,10 +55,7 @@ int	change_case(t_mlx *root, int y, int x, int new_case, int old_case)
 
 int	flood_fill(t_mlx *root, int y, int x, int new_case)
 {
-	int	old_case;
-	
-	old_case = 2;
-	if (change_case(root, y, x, new_case, old_case))
+	if (change_case(root, y, x, new_case))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/13 15:07:02 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:26:01 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_mlx
 	char	**data_map;
 	char	**map1;
 	int		**map;
+	int		ceilling;
+	int		floor;
 	int		x; //collone
 	int		y; //ligne
 	int		pos_p_x;
@@ -127,6 +129,7 @@ int     esc_code(int keycode, t_mlx *root);
 int		check_data(char **data);
 int		check_map(char **map);
 int		flood_fill(t_mlx *root, int y, int x, int new_case);
+void	stock_data(t_mlx *root);
 
 // player & detections
 void	compteur_de_pas(void);
