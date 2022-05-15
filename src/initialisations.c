@@ -1,40 +1,18 @@
 #include "../header.h"
 
 
-// int map[NUMBER_MAP_ROWS][NUMBER_MAP_COLS] = {
-//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-// };
-
-int mapHasWallAt(t_mlx *root, float x, float y) 
+int	there_is_wall(t_mlx *root, float x, float y)
 {
-    if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
-        return TRUE;
-    }
-    int mapGridIndexX = floor(x / TILE_SIZE);
-    int mapGridIndexY = floor(y / TILE_SIZE);
-    return root->map[mapGridIndexY][mapGridIndexX] != 0;
-}
+	int	map_x;
+	int	map_y;
 
-static void	malloc_tabs_of_xy(t_mlx *root)
-{
-	root->walls->x = malloc(sizeof(int) * root->walls->max);
-	if (root->walls->x == 0)
-		malloc_error(root);
-	root->walls->y = malloc(sizeof(int) * root->walls->max);
-	if (root->walls->y == 0)
-		malloc_error(root);
+	map_x = floor(x / TILE_SIZE);
+	map_y = floor(y / TILE_SIZE);
+	if ((x < 0 || x >= WINDOW_WIDTH) || (y < 0 || y >= WINDOW_HEIGHT))
+		return (TRUE);
+	if (root->map[map_y][map_x] != 0 && root->map[map_y][map_x] != '1')
+		return (FALSE);
+	return (TRUE);
 }
 
 static void	malloc_struct(t_mlx *root)
@@ -45,29 +23,43 @@ static void	malloc_struct(t_mlx *root)
 	root->maps = malloc(sizeof(t_img));
 	if (root->maps == 0)
 		malloc_error(root);
-	root->walls = malloc(sizeof(t_tuple));
-	if (root->walls == 0)
-		malloc_error(root);
 }
+
+int	parse_color(char *path)
+{
+	int		r;
+	int		g;
+	int		b;
+	int		converted_color;
+	char	**color;
+
+	color = ft_split(path, ',');
+	r = ft_atoi(color[0]);
+	g = ft_atoi(color[1]);
+	b = ft_atoi(color[2]);
+	converted_color = r << 16 | g << 8 | b;
+	return (converted_color);
+}
+
+
 
 static void	init_struct(t_mlx *root, char *path)
 {
 	root->path = path;
 
 	root->map = fill_map(root);
+	root->ceiling = parse_color("0,0,50");
+	root->floor = parse_color("50,0,0");
+
 	root->is_player = 0;
-	root->walls->max = 100; // automatize max wall with parsing
 	root->win_width = 0;
 	root->win_height = 0;
 	root->mlx = 0;
 	root->player->img = 0;
 	root->player->img = 0;
-	root->walls->y = 0;
-	root->walls->x = 0;
 	root->maps->width = WINDOW_WIDTH;
 	root->maps->height = WINDOW_HEIGHT;
 }
-
 
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -79,66 +71,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 }
 
 
-void put_rectangle(t_mlx *root, int x, int y)
-{
-	int i = -1;
-	int j;
-	while (++i < TILE_SIZE)
-	{
-		j = -1;
-		while (++j < TILE_SIZE)
-			// mlx_pixel_put(root->mlx, root->mlx_win, x + i, y + j, 0x000000AA);
-			my_mlx_pixel_put(root->maps, x + i, y + j, 0x000000AA);
-
-	}
-
-
-}
-
-int	draw_map(t_mlx *root)
-{
-	int			i;
-	int			j;
-	int			x;
-	int f = -1;
-	static int first_draw = 1;
-	int	y = 0;
-
-	i = -1;
-	x = 0;
-	while (++i < NUMBER_MAP_ROWS)
-	{
-		j = -1;
-		x = 0;
-		while (++j < NUMBER_MAP_COLS)
-		{
-
-			if (root->map[i][j] == '1')
-			{
-				put_rectangle(root, x, y);
-				// put_wall(root, x, y);
-				if (first_draw == 1)
-				{
-					root->walls->x[++f] = x;
-					root->walls->y[f] = y;
-				}
-			}
-			x += TILE_SIZE;
-		}
-	y += TILE_SIZE;
-	}
-	first_draw = 0;
-	return (1);
-}
-
-
-
 int	init_player(t_mlx *root, int x, int y)
 {
 	t_img *player;
 
-
-	player = root->player;
+	player = malloc(sizeof(t_img));
 	player->x = x;
 	player->y = y;
 	player->height = 1;
@@ -146,47 +83,14 @@ int	init_player(t_mlx *root, int x, int y)
 	player->turn_direction = 0;
 	player->walk_direction = 0;
 	player->rotation_angle = PI / 2;
-	player->walk_speed = 1;
-	player->turn_speed = 1 * (PI / 180);
+	player->walk_speed = 4;
+	player->turn_speed = 4 * (PI / 180);
+	root->player = player;
 
 
 	return (1);
 }
 
-
-
-
-void draw_player(t_mlx *root)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < root->player->width)
-	{
-		j = -1;
-		while (++j < root->player->height)
-			// mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + i, root->player->y + j, 0x00FF0000);
-			my_mlx_pixel_put(root->maps, root->player->x + i, root->player->y + j, 0x00FF0000);
-	}
-	i = -1;
-	while (++i < 40)
-		my_mlx_pixel_put(root->maps, root->player->x + cos(root->player->rotation_angle) * i, root->player->y + sin(root->player->rotation_angle) * i, 0x00FF0000);
-}
-
-void redraw(t_mlx *root)
-{
-
-	t_img img;
-	img.img = mlx_new_image(root->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	root->maps = &img;
-	draw_map(root);
-	draw_player(root);
-	mlx_put_image_to_window(root->mlx, root->mlx_win, img.img, 0, 0);
-	mlx_destroy_image(root->mlx, img.img);
-
-}
 
 void move_player(t_mlx *root)
 {
@@ -195,19 +99,18 @@ void move_player(t_mlx *root)
 
     float new_x = root->player->x + cos(root->player->rotation_angle) * move_step;
     float new_y = root->player->y + sin(root->player->rotation_angle) * move_step;
-
-    root->player->x = new_x;
-    root->player->y = new_y;
+	if (!there_is_wall(root, new_x, new_y))
+	{
+		root->player->x = new_x;
+		root->player->y = new_y;
+	}
 }
 
 int update_image(t_mlx *root) 
 {
-
-	move_player(root);
-	redraw(root);
-
 	raycast(root);
-	render_rays(root);
+	generate_3d_projection(root);
+	move_player(root);
 	return (1);
 }
 
@@ -223,13 +126,12 @@ void	game_driver(char *path)
 	malloc_struct(root);
 	init_struct(root, path);
 	// map_parsing(root);
-	malloc_tabs_of_xy(root);
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
 
-	init_player(root, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	redraw(root);
+	init_player(root, 640, 512);
+	setup_textures(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);

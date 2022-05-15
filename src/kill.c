@@ -22,12 +22,6 @@ void	kill_all(t_mlx *root)
 		free(root->player);
 	if (root->maps)
 		free(root->maps);
-	if (root->walls->y)
-		free(root->walls->y);
-	if (root->walls->x)
-		free(root->walls->x);
-	if (root->walls)
-		free(root->walls);
 	if (root->mlx)
 		free(root->mlx);
 	if (root)

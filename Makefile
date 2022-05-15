@@ -12,6 +12,8 @@ SRCS =	src/main.c \
 		src/error.c \
 		src/player_moove.c \
 		src/raycasting.c \
+		src/init_textures.c \
+		src/projections.c
 
 
 

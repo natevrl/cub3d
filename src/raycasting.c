@@ -1,7 +1,5 @@
 #include "../header.h"
 
-
-
 float normalize_ray(float angle)
 {
 	angle = remainder(angle, DOUBLE_PI);
@@ -12,19 +10,15 @@ float normalize_ray(float angle)
 	return angle;
 }
 
-float distanceBetweenPoints(float x1, float y1, float x2, float y2) {
+float distance_between_points(float x1, float y1, float x2, float y2) 
+{
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-int	map_position(char **map, int y, int x)
-{
-	return (map[y][x]);
-}
-
-void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
+void cast_one_ray(t_mlx *root, float ray_angle, t_rays *rays)
 {
 	ray_angle = normalize_ray(ray_angle);
-	int facing_down = ray_angle > 0 && ray_angle < PI;
+	int facing_down = (ray_angle > 0 && ray_angle < PI);
 	int facing_up = !facing_down;
 	int facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
 	int facing_left = !facing_right;
@@ -33,10 +27,10 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 	float xstep, ystep;
 
     // HORIZONTAL PART
-	int found_horrizontal_wall = 0;
+	int found_horrizontal_wall = FALSE;
 	float horizontal_wall_hit_x = 0;
 	float horizontal_wall_hit_y = 0;
-	float horizontal_wall_content = 0;
+	int horizontal_wall_content = 0;
 
 
 	  // Find the y-coordinate of the closest horizontal grid intersection
@@ -58,20 +52,20 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
     float nextHorzTouchY = yintercept;
 
     // Increment xstep and ystep until we find a wall
-    while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT) 
+    while ((nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH) && (nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)) 
 	{
         float xToCheck = nextHorzTouchX;
         float yToCheck = nextHorzTouchY + (facing_up ? -1 : 0);
         
-        if (mapHasWallAt(root, xToCheck, yToCheck)) 
+        if (there_is_wall(root, xToCheck, yToCheck)) 
 		{
             // found a wall hit
             horizontal_wall_hit_x = nextHorzTouchX;
             horizontal_wall_hit_y = nextHorzTouchY;
-            horizontal_wall_content = 1;
-            found_horrizontal_wall = 1;
+            horizontal_wall_content = root->map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+            found_horrizontal_wall = TRUE;
             break;
-        } 
+        }
 		else 
 		{
             nextHorzTouchX += xstep;
@@ -80,10 +74,10 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 	}
 
     // VERTICAL PART
-    int found_vertical_wall = 0;
+    int found_vertical_wall = FALSE;
 	float vertical_wall_hit_x = 0;
 	float vertical_wall_hit_y = 0;
-	float vertical_wall_content = 0;
+	int vertical_wall_content = 0;
 
 
 	  // Find the x-coordinate of the closest vertical grid intersection
@@ -109,13 +103,13 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 	{
         float xToCheck = nextVertTouchX + (facing_left ? -1 : 0);
         float yToCheck = nextVertTouchY;
-        if (mapHasWallAt(root, xToCheck, yToCheck)) 
+        if (there_is_wall(root, xToCheck, yToCheck)) 
 		{
             // found a wall hit
             vertical_wall_hit_x = nextVertTouchX;
             vertical_wall_hit_y = nextVertTouchY;
             vertical_wall_content = root->map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
-            found_vertical_wall = 1;
+            found_vertical_wall = TRUE;
             break;
         } 
 		else 
@@ -127,68 +121,47 @@ void cast_one_ray(t_mlx *root, float ray_angle, size_t id)
 
         // Calculate both horizontal and vertical hit distances and choose the smallest one
     float horzHitDistance = found_horrizontal_wall
-        ? distanceBetweenPoints(root->player->x, root->player->y, horizontal_wall_hit_x, horizontal_wall_hit_y)
+        ? distance_between_points(root->player->x, root->player->y, horizontal_wall_hit_x, horizontal_wall_hit_y)
         : FLT_MAX;
     float vertHitDistance = found_vertical_wall
-        ? distanceBetweenPoints(root->player->x, root->player->y, vertical_wall_hit_x, vertical_wall_hit_y)
+        ? distance_between_points(root->player->x, root->player->y, vertical_wall_hit_x, vertical_wall_hit_y)
         : FLT_MAX;
 
+    rays->distance = horzHitDistance;
+    rays->wall_hit_x = horizontal_wall_hit_x;
+    rays->wall_hit_y = horizontal_wall_hit_y;
+    rays->wall_hit_content = horizontal_wall_content;
+    rays->was_hit_vertical = FALSE;
     if (vertHitDistance < horzHitDistance) 
     {
-        root->rays[id]->distance = vertHitDistance;
-        root->rays[id]->wall_hit_x = vertical_wall_hit_x;
-        root->rays[id]->wall_hit_y = vertical_wall_hit_y;
-        root->rays[id]->wallHitContent = vertical_wall_content;
-        root->rays[id]->was_hit_vertical = 1;
+        rays->distance = vertHitDistance;
+        rays->wall_hit_x = vertical_wall_hit_x;
+        rays->wall_hit_y = vertical_wall_hit_y;
+        rays->wall_hit_content = vertical_wall_content;
+        rays->was_hit_vertical = TRUE;
     } 
-    else 
-    {
-        root->rays[id]->distance = horzHitDistance;
-        root->rays[id]->wall_hit_x = horizontal_wall_hit_x;
-        root->rays[id]->wall_hit_y = horizontal_wall_hit_y;
-        root->rays[id]->wallHitContent = horizontal_wall_content;
-        root->rays[id]->was_hit_vertical = 0;
-    }
-    root->rays[id]->ray_angle = ray_angle;
-    root->rays[id]->is_ray_facing_down = facing_down;
-    root->rays[id]->is_ray_facing_up = facing_up;
-    root->rays[id]->is_ray_facing_left = facing_left;
-    root->rays[id]->is_ray_facing_right = facing_right;
+
+    rays->ray_angle = ray_angle;
+    rays->is_ray_facing_down = facing_down;
+    rays->is_ray_facing_up = facing_up;
+    rays->is_ray_facing_left = facing_left;
+    rays->is_ray_facing_right = facing_right;
 }
 
+// ray_angle = root->player->rotation_angle - (FOV_ANGLE / 2);
+// ray_angle += FOV_ANGLE / NUMBER_OF_RAYS;
 void raycast(t_mlx *root) 
 {
     float ray_angle;
-	size_t id;
+	int id;
 
 	id = 0;
-	// ray_angle = root->player->rotation_angle - (FOV_ANGLE / 2);
 	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / ((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2)));
 	root->rays = malloc(sizeof(t_rays) * NUMBER_OF_RAYS + 1);
 	while (id < NUMBER_OF_RAYS)
 	{
-        cast_one_ray(root, ray_angle, id);
-        // ray_angle += FOV_ANGLE / NUMBER_OF_RAYS;
+        cast_one_ray(root, ray_angle, &root->rays[id]);
     	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / ((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2)));
         id++;
-    }
-}
-
-
-// dessine toutes les rays : du player jusqu'au premier mur touche
-void render_rays(t_mlx *root) 
-{
-    int j;
-    int i = -1;
-    while (++i < NUMBER_OF_RAYS)
-    {
-        j = -1;
-        while (++j < root->rays[i]->wall_hit_x)
-		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + cos(root->player->rotation_angle) * j, root->player->y + sin(root->player->rotation_angle), 0x0000FF00);
-
-        j = -1;
-        while (++j < root->rays[i]->wall_hit_y)
-		    mlx_pixel_put(root->mlx, root->mlx_win, root->player->x + cos(root->player->rotation_angle), root->player->y + sin(root->player->rotation_angle) * j, 0x0000FF00);
-        
     }
 }
