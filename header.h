@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/16 00:38:55 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/16 13:15:03 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ typedef struct s_mlx
 	char 	**map;
 	int		win_height;
 	int		win_width;
-	int		is_player;
 	int		ceiling;
 	int		floor;
 	void	*mlx;

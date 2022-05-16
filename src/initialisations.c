@@ -15,15 +15,12 @@ int	there_is_wall(t_mlx *root, float x, float y)
 	return (TRUE);
 }
 
-static void	malloc_struct(t_mlx *root)
-{
-	root->player = malloc(sizeof(t_img));
-	if (root->player == 0)
-		malloc_error(root);
-	root->maps = malloc(sizeof(t_img));
-	if (root->maps == 0)
-		malloc_error(root);
-}
+// static void	malloc_struct(t_mlx *root)
+// {
+// 	root->maps = malloc(sizeof(t_img));
+// 	if (root->maps == 0)
+// 		malloc_error(root);
+// }
 
 int	parse_color(char *path)
 {
@@ -38,6 +35,10 @@ int	parse_color(char *path)
 	g = ft_atoi(color[1]);
 	b = ft_atoi(color[2]);
 	converted_color = r << 16 | g << 8 | b;
+	free(color[0]);
+	free(color[1]);
+	free(color[2]);
+	free(color);
 	return (converted_color);
 }
 
@@ -51,14 +52,9 @@ static void	init_struct(t_mlx *root, char *path)
 	root->ceiling = parse_color("0,0,50");
 	root->floor = parse_color("50,0,0");
 
-	root->is_player = 0;
-	root->win_width = 0;
-	root->win_height = 0;
+	root->win_width = WINDOW_WIDTH;
+	root->win_height = WINDOW_HEIGHT;
 	root->mlx = 0;
-	root->player->img = 0;
-	root->player->img = 0;
-	root->maps->width = WINDOW_WIDTH;
-	root->maps->height = WINDOW_HEIGHT;
 }
 
 
@@ -86,8 +82,6 @@ int	init_player(t_mlx *root, int x, int y)
 	player->walk_speed = 4;
 	player->turn_speed = 4 * (PI / 180);
 	root->player = player;
-
-
 	return (1);
 }
 
@@ -111,6 +105,7 @@ int update_image(t_mlx *root)
 	raycast(root);
 	generate_3d_projection(root);
 	move_player(root);
+	free(root->rays);
 	return (1);
 }
 
@@ -123,9 +118,8 @@ void	game_driver(char *path)
 	root = malloc(sizeof(t_mlx));
 	if (root == 0)
 		malloc_error(root);
-	malloc_struct(root);
+	// malloc_struct(root);
 	init_struct(root, path);
-	// map_parsing(root);
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
@@ -137,5 +131,5 @@ void	game_driver(char *path)
 	mlx_loop_hook(root->mlx, update_image, root);
 	mlx_hook(root->mlx_win, 17, 1L << 17, mlx_loop_end, root->mlx);
 	mlx_loop(root->mlx);
-	// kill_all(root);
+	kill_all(root);
 }

@@ -3,11 +3,12 @@
 
 void	setup_one_texture(t_mlx *root, char *path, void **direction)
 {
-	*direction = mlx_xpm_file_to_image(root->mlx, path, &root->maps->width, \
-	 &root->maps->height);
+	int txtsize;
+
+	txtsize = 64;
+	*direction = mlx_xpm_file_to_image(root->mlx, path, &txtsize, &txtsize);
 	if (!direction)
-		exit(-1);
-		//kill_all() a la place de l'exit
+		kill_all(root);
 }
 
 void	setup_textures(t_mlx *root)
