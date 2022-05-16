@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/16 13:15:03 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/16 20:52:20 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,26 @@ typedef struct s_img
 	int				*data_color_addr[4];
 }	t_img;
 
+typedef struct s_direction
+{
+	int found_wall;
+	int wall_content;
+	float wall_hit_x;
+	float wall_hit_y;
+	float xintercept;
+	float yintercept;
+	float next_touch_x;
+	float next_touch_y;
+	float xstep;
+	float ystep;
+	int facing_down;
+	int facing_up;
+	int facing_right;
+	int facing_left;
+	float hit_distance;
+	float x_to_check;
+	float y_to_check;
+} t_direction;
 
 
 typedef struct s_project3d
