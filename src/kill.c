@@ -16,11 +16,15 @@ static void	kill_window(t_mlx *root)
 
 void	kill_all(t_mlx *root)
 {
+	int i;
+	
 	kill_window(root);
+	i = -1;
+	while (++i < NUMBER_MAP_ROWS)
+		free(root->map[i]);
+	free(root->map);
 	if (root->player)
 		free(root->player);
-	if (root->map)
-		free(root->map);
 	if (root->mlx)
 		free(root->mlx);
 	if (root)

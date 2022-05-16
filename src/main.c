@@ -13,11 +13,6 @@ static int	isnot_cub(char *str)
 
 int	main(int ac, char **av)
 {
-    t_mlx	*root;
-
-	root = malloc(sizeof(t_mlx));
-	if (!root)
-		malloc_error(root);
 	if (ac != 2)
 		return (printf("Error\nInvalid number of arguments\n"), -1);
 	if (isnot_cub(av[1]) != 0)

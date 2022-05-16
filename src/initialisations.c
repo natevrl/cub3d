@@ -50,7 +50,7 @@ static void	init_struct(t_mlx *root, char *path)
 
 	root->map = fill_map(root);
 	root->ceiling = parse_color("0,0,50");
-	root->floor = parse_color("50,0,0");
+	root->floor = parse_color("0,50,0");
 
 	root->win_width = WINDOW_WIDTH;
 	root->win_height = WINDOW_HEIGHT;
