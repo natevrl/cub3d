@@ -26,6 +26,58 @@ void init_ray_direction(t_direction *direction, float ray_angle)
 	direction->facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
 	direction->facing_left = !direction->facing_right;
 }
+// Increment xstep and ystep until we find a wall
+void increment_until_wall(t_mlx *root, t_direction *direc, int flag)
+{
+    while ((direc->next_touch_x >= 0 && direc->next_touch_x <= WINDOW_WIDTH) && ( direc->next_touch_y >= 0 &&  direc->next_touch_y <= WINDOW_HEIGHT)) 
+	{
+        direc->x_to_check = direc->next_touch_x;
+        direc->y_to_check = direc->next_touch_y;
+        if (flag == 1 && direc->facing_up)
+            direc->y_to_check = direc->next_touch_y - 1;
+        if (flag == 2 && direc->facing_left)
+            direc->y_to_check = direc->next_touch_y - 1;
+
+        if (there_is_wall(root, direc->x_to_check, direc->y_to_check)) 
+		{
+            // found a wall hit
+            direc->wall_hit_x = direc->next_touch_x;
+            direc->wall_hit_y =  direc->next_touch_y;
+            direc->wall_content = root->map[(int)floor(direc->y_to_check / TILE_SIZE)][(int)floor(direc->x_to_check / TILE_SIZE)];
+            direc->found_wall = TRUE;
+            break;
+        }
+		else 
+		{
+             direc->next_touch_x += direc->xstep;
+             direc->next_touch_y += direc->ystep;
+        }
+	}
+
+
+    // // Increment xstep and ystep until we find a wall
+    // while (vert->next_touch_x >= 0 && vert->next_touch_x <= WINDOW_WIDTH && vert->next_touch_y >= 0 && vert->next_touch_y <= WINDOW_HEIGHT) 
+	// {
+    //     float xToCheck = vert->next_touch_x + (vert->facing_left ? -1 : 0);
+    //     float yToCheck = vert->next_touch_y;
+    //     if (there_is_wall(root, xToCheck, yToCheck)) 
+	// 	{
+    //         // found a wall hit
+    //         vert->wall_hit_x = vert->next_touch_x;
+    //         vert->wall_hit_y = vert->next_touch_y;
+    //         vert->wall_content = root->map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+    //         vert->found_wall = TRUE;
+    //         break;
+    //     } 
+	// 	else 
+	// 	{
+    //         vert->next_touch_x += vert->xstep;
+    //         vert->next_touch_y += vert->ystep;
+    //     }
+	// }
+
+
+}
 
 void calcul_horizontal_rays(t_mlx *root, t_direction *horz, float ray_angle)
 {
@@ -48,28 +100,9 @@ void calcul_horizontal_rays(t_mlx *root, t_direction *horz, float ray_angle)
 
     horz->next_touch_x = horz->xintercept;
     horz->next_touch_y = horz->yintercept;
+    increment_until_wall(root, horz, 1);
 
-    // Increment xstep and ystep until we find a wall
-    while ((horz->next_touch_x >= 0 && horz->next_touch_x <= WINDOW_WIDTH) && ( horz->next_touch_y >= 0 &&  horz->next_touch_y <= WINDOW_HEIGHT)) 
-	{
-        horz->x_to_check = horz->next_touch_x;
-        horz->y_to_check = horz->next_touch_y + (horz->facing_up ? -1 : 0);
-        
-        if (there_is_wall(root, horz->x_to_check, horz->y_to_check)) 
-		{
-            // found a wall hit
-            horz->wall_hit_x = horz->next_touch_x;
-            horz->wall_hit_y =  horz->next_touch_y;
-            horz->wall_content = root->map[(int)floor(horz->y_to_check / TILE_SIZE)][(int)floor(horz->x_to_check / TILE_SIZE)];
-            horz->found_wall = TRUE;
-            break;
-        }
-		else 
-		{
-             horz->next_touch_x += horz->xstep;
-             horz->next_touch_y += horz->ystep;
-        }
-	}
+
 }
 
 void calcul_vertical_rays(t_mlx *root, t_direction *vert, float ray_angle)
@@ -90,27 +123,27 @@ void calcul_vertical_rays(t_mlx *root, t_direction *vert, float ray_angle)
     vert->ystep *= (vert->facing_up && vert->ystep > 0) ? -1 : 1;
     vert->ystep *= (vert->facing_down && vert->ystep < 0) ? -1 : 1;
 
-    float nextVertTouchX = vert->xintercept;
-    float nextVertTouchY = vert->yintercept;
-
+    vert->next_touch_x = vert->xintercept;
+    vert->next_touch_y = vert->yintercept;
+    // increment_until_wall(root, vert, 2);
     // Increment xstep and ystep until we find a wall
-    while (nextVertTouchX >= 0 && nextVertTouchX <= WINDOW_WIDTH && nextVertTouchY >= 0 && nextVertTouchY <= WINDOW_HEIGHT) 
+    while (vert->next_touch_x >= 0 && vert->next_touch_x <= WINDOW_WIDTH && vert->next_touch_y >= 0 && vert->next_touch_y <= WINDOW_HEIGHT) 
 	{
-        float xToCheck = nextVertTouchX + (vert->facing_left ? -1 : 0);
-        float yToCheck = nextVertTouchY;
+        float xToCheck = vert->next_touch_x + (vert->facing_left ? -1 : 0);
+        float yToCheck = vert->next_touch_y;
         if (there_is_wall(root, xToCheck, yToCheck)) 
 		{
             // found a wall hit
-            vert->wall_hit_x = nextVertTouchX;
-            vert->wall_hit_y = nextVertTouchY;
+            vert->wall_hit_x = vert->next_touch_x;
+            vert->wall_hit_y = vert->next_touch_y;
             vert->wall_content = root->map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
             vert->found_wall = TRUE;
             break;
         } 
 		else 
 		{
-            nextVertTouchX += vert->xstep;
-            nextVertTouchY += vert->ystep;
+            vert->next_touch_x += vert->xstep;
+            vert->next_touch_y += vert->ystep;
         }
 	}
 
