@@ -3,14 +3,19 @@ SRCS =	src/main.c \
 		libs/get_next_line/get_next_line_utils.c\
 		src/initialisations.c \
 		src/kill.c \
+		src/check_data.c \
+		src/flood_fill.c \
 		src/map_parsing.c \
+		src/map_parsing2.c \
 		src/map_error.c \
 		src/utils.c \
 		src/error.c \
+		src/error2.c \
 		src/player_moove.c \
 		src/raycasting.c \
 		src/init_textures.c \
-		src/projections.c
+		src/projections.c \
+		src/utils_tab.c \
 
 
 

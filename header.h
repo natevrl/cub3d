@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/16 20:52:20 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:29:26 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_img
 	int				height;
 	float			x;
 	float			y;
+	char			orientation;
 	int				starting_position;
 	int				turn_direction; // -1 for left, +1 for right
 	int				walk_direction; // -1 for back, +1 for front
@@ -139,10 +140,15 @@ typedef struct s_mlx
 {
 	char	*path;
 	char 	**map;
+	char	**data_map;
+	int		**map_int;
 	int		win_height;
 	int		win_width;
+	int		is_player;
 	int		ceiling;
 	int		floor;
+	int		x;
+	int		y;
 	void	*mlx;
 	void	*mlx_win;
 	t_img	*maps;
@@ -168,9 +174,13 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 // map & parsing
 void	number_of(t_mlx *root, char *str);
 void	map_drawer(t_mlx *root);
-void	map_parsing(t_mlx *root);
+void	map_parsing(t_mlx *root, char *str);
 int     esc_code(int keycode, t_mlx *root);
-char	**fill_map(t_mlx *root);
+void	map_parsing2(t_mlx *root);
+int		check_data(char **data);
+void	stock_data(t_mlx *root);
+int		check_map(char **map);
+int		flood_fill(t_mlx *root, int y, int x, int new_case);
 
 // player & detections
 int		there_is_wall(t_mlx *root, float x, float y);
@@ -195,6 +205,8 @@ void	check_read_error(t_mlx *root, int ret, char *str);
 int		walls_error(t_mlx *root, int line, char *gnl);
 int		line_bad_len(t_mlx *root, char *gnl);
 int		free_return(char *str);
+int		rgb_error(char **tab);
+int		data_error(t_mlx *root);
 
 // raycasting
 void render_rays(t_mlx *root);
@@ -207,6 +219,9 @@ int		intstrlen(char *str);
 void	generate_3d_projection(t_mlx *root);
 void	init_texture(t_mlx *root, t_img *texture);
 void	setup_textures(t_mlx *root);
+void	free_tab(char **tab);
+void	free_tab_int(int **tab);
+int		tab_len(char **tab);
 
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 10

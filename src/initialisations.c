@@ -22,41 +22,15 @@ int	there_is_wall(t_mlx *root, float x, float y)
 // 		malloc_error(root);
 // }
 
-int	parse_color(char *path)
-{
-	int		r;
-	int		g;
-	int		b;
-	int		converted_color;
-	char	**color;
-
-	color = ft_split(path, ',');
-	r = ft_atoi(color[0]);
-	g = ft_atoi(color[1]);
-	b = ft_atoi(color[2]);
-	converted_color = r << 16 | g << 8 | b;
-	free(color[0]);
-	free(color[1]);
-	free(color[2]);
-	free(color);
-	return (converted_color);
-}
-
-
-
 static void	init_struct(t_mlx *root, char *path)
 {
 	root->path = path;
-
-	root->map = fill_map(root);
-	root->ceiling = parse_color("0,0,50");
-	root->floor = parse_color("0,50,0");
-
+	root->map = NULL;
+	root->data_map = NULL;
+	root->is_player = 0;
 	root->win_width = WINDOW_WIDTH;
 	root->win_height = WINDOW_HEIGHT;
-	root->mlx = 0;
 }
-
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -123,8 +97,11 @@ void	game_driver(char *path)
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
-
 	init_player(root, 640, 512);
+
+	map_parsing(root, path);
+	map_parsing2(root);
+	stock_data(root);
 	setup_textures(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release

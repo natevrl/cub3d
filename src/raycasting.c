@@ -61,6 +61,7 @@ void calcul_horizontal_rays(t_mlx *root, t_direction *horz, float ray_angle)
             horz->wall_hit_x = horz->next_touch_x;
             horz->wall_hit_y =  horz->next_touch_y;
             horz->wall_content = root->map[(int)floor(horz->y_to_check / TILE_SIZE)][(int)floor(horz->x_to_check / TILE_SIZE)];
+            printf("%d\n", horz->wall_content);
             horz->found_wall = TRUE;
             break;
         }
