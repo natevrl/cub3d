@@ -8,19 +8,13 @@ int	there_is_wall(t_mlx *root, float x, float y)
 
 	map_x = floor(x / TILE_SIZE);
 	map_y = floor(y / TILE_SIZE);
-	if ((x < 0 || x >= WINDOW_WIDTH) || (y < 0 || y >= WINDOW_HEIGHT))
+	if ((x < 0 || x >= root->x * TILE_SIZE) || (y < 0 || y >= root->y * TILE_SIZE))
 		return (TRUE);
 	if (root->map[map_y][map_x] != 0 && root->map[map_y][map_x] != '1')
 		return (FALSE);
 	return (TRUE);
 }
 
-// static void	malloc_struct(t_mlx *root)
-// {
-// 	root->maps = malloc(sizeof(t_img));
-// 	if (root->maps == 0)
-// 		malloc_error(root);
-// }
 
 static void	init_struct(t_mlx *root, char *path)
 {

@@ -50,7 +50,7 @@ void calcul_horizontal_rays(t_mlx *root, t_direction *horz, float ray_angle)
     horz->next_touch_y = horz->yintercept;
 
     // Increment xstep and ystep until we find a wall
-    while ((horz->next_touch_x >= 0 && horz->next_touch_x <= WINDOW_WIDTH) && ( horz->next_touch_y >= 0 &&  horz->next_touch_y <= WINDOW_HEIGHT)) 
+    while ((horz->next_touch_x >= 0 && horz->next_touch_x <= root->x * TILE_SIZE) && ( horz->next_touch_y >= 0 &&  horz->next_touch_y <= root->y * TILE_SIZE)) 
 	{
         horz->x_to_check = horz->next_touch_x;
         horz->y_to_check = horz->next_touch_y + (horz->facing_up ? -1 : 0);
@@ -61,7 +61,6 @@ void calcul_horizontal_rays(t_mlx *root, t_direction *horz, float ray_angle)
             horz->wall_hit_x = horz->next_touch_x;
             horz->wall_hit_y =  horz->next_touch_y;
             horz->wall_content = root->map[(int)floor(horz->y_to_check / TILE_SIZE)][(int)floor(horz->x_to_check / TILE_SIZE)];
-            printf("%d\n", horz->wall_content);
             horz->found_wall = TRUE;
             break;
         }
@@ -95,7 +94,7 @@ void calcul_vertical_rays(t_mlx *root, t_direction *vert, float ray_angle)
     float nextVertTouchY = vert->yintercept;
 
     // Increment xstep and ystep until we find a wall
-    while (nextVertTouchX >= 0 && nextVertTouchX <= WINDOW_WIDTH && nextVertTouchY >= 0 && nextVertTouchY <= WINDOW_HEIGHT) 
+    while (nextVertTouchX >= 0 && nextVertTouchX <= root->x * TILE_SIZE && nextVertTouchY >= 0 && nextVertTouchY <= root->y * TILE_SIZE) 
 	{
         float xToCheck = nextVertTouchX + (vert->facing_left ? -1 : 0);
         float yToCheck = nextVertTouchY;
@@ -176,12 +175,12 @@ void raycast(t_mlx *root)
 	int id;
 
 	id = 0;
-	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / ((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2)));
+	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / (((root->x * TILE_SIZE) / 2) / tan((120 * (PI / 180)) / 2)));
 	root->rays = malloc(sizeof(t_rays) * NUMBER_OF_RAYS + 1);
 	while (id < NUMBER_OF_RAYS)
 	{
         cast_one_ray(root, ray_angle, &root->rays[id]);
-    	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / ((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2)));
+    	ray_angle = root->player->rotation_angle + atan((id - NUMBER_OF_RAYS / 2) / (((root->x * TILE_SIZE) / 2) / tan((120 * (PI / 180)) / 2)));
         id++;
     }
 }

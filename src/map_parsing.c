@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/17 12:57:30 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/17 20:30:58 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	count_elements(t_mlx *root, char *buffer)
 		invalid_map_error(root, buffer);
 	root->win_width = ((i + 1) - root->win_height) / root->win_height;
 	root->map = ft_split(buffer, '\n');
+	i = -1;
+	while (++i < 20)
+		printf("%s\n", root->map[i]);
+	exit(0);
+
 }
 
 static void	up_data(t_mlx *root, char *line)
