@@ -14,8 +14,8 @@ void	setup_one_texture(t_mlx *root, char *path, void **direction)
 void	setup_textures(t_mlx *root)
 {
 	root->no = "textures/txt1.xpm";
-	root->so = "textures/txt1.xpm";
-	root->we = "textures/txt1.xpm";
+	root->so = "textures/center.xpm";
+	root->we = "textures/rock.xpm";
 	root->ea = "textures/txt1.xpm";
 	setup_one_texture(root, root->we, &root->texture_left);
 	setup_one_texture(root, root->ea, &root->texture_right);

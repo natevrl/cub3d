@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:56:32 by nbenhado          #+#    #+#             */
-/*   Updated: 2022/01/17 22:57:21 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/18 14:13:28 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	*ftstrjoin(char *s1, char *s2)
 
 	if (!s1)
 		s1 = ftstrdup("");
+	if (!s2)
+		return (s1);
 	total_size = ftstrlen(s1) + ftstrlen(s2);
 	join = malloc(sizeof(char) * total_size + 1);
 	if (join == NULL)
