@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:52 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/18 14:37:39 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:01:44 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	map_parsing2(t_mlx *root)
 	set_space_and_1(root);
 	if (flood_fill(root, root->player->y, root->player->x, 0))
 		invalid_map_error(root, NULL);
-	root->player->x = root->player->x * TILE_SIZE;
-	root->player->y = root->player->y * TILE_SIZE;
+	root->player->x = (root->player->x * TILE_SIZE) + (TILE_SIZE / 2);
+	root->player->y = (root->player->y * TILE_SIZE) + (TILE_SIZE / 2);
 }
