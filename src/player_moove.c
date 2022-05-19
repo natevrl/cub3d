@@ -8,12 +8,12 @@ void move_player(t_mlx *root)
 	float new_x;
 	float new_y;
 	
+	root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
 	move_step = root->player->pas_chasse * root->player->walk_speed;
 	new_x = root->player->x - sin(root->player->rota_angle) * move_step;
 	new_y = root->player->y + cos(root->player->rota_angle) * move_step;
 	if (root->player->pas_chasse == 0)
 	{
-		root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
 		move_step = root->player->walk_direction * root->player->walk_speed;
 		new_x = root->player->x + cos(root->player->rota_angle) * move_step;
 		new_y = root->player->y + sin(root->player->rota_angle) * move_step;

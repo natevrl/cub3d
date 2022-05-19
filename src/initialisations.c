@@ -101,7 +101,6 @@ void	game_driver(char *path)
 	root = malloc(sizeof(t_mlx));
 	if (root == 0)
 		malloc_error(root);
-	// malloc_struct(root);
 	init_struct(root, path);
 	root->mlx = mlx_init();
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
@@ -109,6 +108,7 @@ void	game_driver(char *path)
 	init_player(root, 0, 0);
 	map_parsing(root, path);
 	map_parsing2(root);
+	stock_data(root);
 	setup_textures(root);
 	print_tab(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press

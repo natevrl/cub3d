@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 18:06:41 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 20:11:41 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	map_parsing2(t_mlx *root);
 int		flood_fill(t_mlx *root, int y, int x, int new_case);
 int		check_data(char **data);
 int		check_map(t_mlx *root, char **map);
+void	stock_data(t_mlx *root);
 
 // player & detections
 void 	move_player(t_mlx *root);
