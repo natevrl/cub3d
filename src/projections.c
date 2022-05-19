@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 13:29:32 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 17:27:09 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 // setup les bons pixel de couleurs selon les textures de chaque murs
 // texture.data_color_addr[i][[] ==
 // --> trouve le bon pixel de couleur stocker en memoire
-void	setup_colors(t_mlx *root, t_img texture, t_img *img, int y, int x)
+void	setup_colors(t_mlx *root, t_img *img, int y, int x)
 {
 	int	i;
 	int	dist_from_top;
 	int	texture_color_pixel[4];
 
 	dist_from_top = y + (root->project->wallstrip_h / 2) - (WINDOW_HEIGHT / 2);
-	texture.txt_offset_y = dist_from_top * \
-									((float)TILE_SIZE / root->project->wallstrip_h);
+	root->texture.txt_offset_y = dist_from_top * \
+								((float)TILE_SIZE / root->project->wallstrip_h);
 	i = -1;
 	while (++i != 4)
-		texture_color_pixel[i] = texture.data_color_addr[i] \
-					[(TILE_SIZE * texture.txt_offset_y) + texture.txt_offset_x];
+		texture_color_pixel[i] = root->texture.data_color_addr[i] \
+		[(TILE_SIZE * root->texture.txt_offset_y) + root->texture.txt_offset_x];
 	if (root->rays[x].was_hit_vertical && root->rays[x].is_ray_facing_right)
 		my_mlx_pixel_put(img, x, y, texture_color_pixel[0]);
 	else if (root->rays[x].was_hit_vertical && root->rays[x].is_ray_facing_left)
@@ -44,19 +44,18 @@ void	setup_colors(t_mlx *root, t_img texture, t_img *img, int y, int x)
 void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 {
 	int		y;
-	t_img	texture;
 
-	init_texture(root, &texture);
+	init_texture(root, &root->texture);
 	y = project->wall_bot_pix;
 	while (++y <= WINDOW_HEIGHT)
 		my_mlx_pixel_put(img, i, y, root->floor);
 	y = project->wall_top_pix;
 	if (root->rays[i].was_hit_vertical)
-		texture.txt_offset_x = (int)root->rays[i].wall_hit_y % TILE_SIZE;
+		root->texture.txt_offset_x = (int)root->rays[i].wall_hit_y % TILE_SIZE;
 	else
-		texture.txt_offset_x = (int)root->rays[i].wall_hit_x % TILE_SIZE;
+		root->texture.txt_offset_x = (int)root->rays[i].wall_hit_x % TILE_SIZE;
 	while (++y <= project->wall_bot_pix)
-		setup_colors(root, texture, img, y, i);
+		setup_colors(root, img, y, i);
 	y = -1;
 	while (++y <= project->wall_top_pix)
 		my_mlx_pixel_put(img, i, y, root->ceiling);
@@ -71,10 +70,12 @@ void	projections(t_mlx *root, t_project3d **project, int i)
 	(*project)->projected_wall_h = (TILE_SIZE / (*project)->perp_distance) * \
 						((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2));
 	(*project)->wallstrip_h = (int)(*project)->projected_wall_h;
-	(*project)->wall_top_pix = (WINDOW_HEIGHT / 2) - ((*project)->wallstrip_h / 2);
+	(*project)->wall_top_pix = (WINDOW_HEIGHT / 2) - \
+											((*project)->wallstrip_h / 2);
 	if ((*project)->wall_top_pix < 0)
 		(*project)->wall_top_pix = 0;
-	(*project)->wall_bot_pix = (WINDOW_HEIGHT / 2) + ((*project)->wallstrip_h / 2);
+	(*project)->wall_bot_pix = (WINDOW_HEIGHT / 2) + \
+											((*project)->wallstrip_h / 2);
 	if ((*project)->wall_bot_pix > WINDOW_HEIGHT)
 		(*project)->wall_bot_pix = WINDOW_HEIGHT;
 }
@@ -92,7 +93,6 @@ void	generate_3d_projection(t_mlx *root)
 	i = -1;
 	while (++i < NUMBER_OF_RAYS)
 	{
-		// printf("OUI\n");
 		projections(root, &root->project, i);
 		render_colors(root, &img, root->project, i);
 	}
