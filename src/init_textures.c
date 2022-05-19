@@ -11,12 +11,46 @@ void	setup_one_texture(t_mlx *root, char *path, void **direction)
 		kill_all(root);
 }
 
+char	*take_path(char *data)
+{
+	int		i;
+	int		j;
+	char	*ret;
+
+	i = 0;
+	while (data[i] != ' ')
+		i++;
+	while (data[i] == ' ')
+		i++;
+	ret = malloc(sizeof(char) * (ft_strlen(data) - i));
+	j = 0;
+	while (data[i] != '\n')
+	{
+		ret[j] = data[i];
+		i++;
+		j++;
+	}
+	ret[j] = '\0';
+	return (ret);
+}
+
 void	setup_textures(t_mlx *root)
 {
-	root->no = "textures/txt1.xpm";
-	root->so = "textures/mur64.xpm";
-	root->we = "textures/wall_wood.xpm";
-	root->ea = "textures/fire.xpm";
+	int	i;
+
+	i = 0;
+	while (root->data_map[i])
+	{
+		if (ft_strncmp(root->data_map[i], "NO ", 3) == 0)
+			root->no = take_path(root->data_map[i]);
+		if (ft_strncmp(root->data_map[i], "SO ", 3) == 0)
+			root->so = take_path(root->data_map[i]);
+		if (ft_strncmp(root->data_map[i], "EA ", 3) == 0)
+			root->ea = take_path(root->data_map[i]);
+		if (ft_strncmp(root->data_map[i], "WE ", 3) == 0)
+			root->we = take_path(root->data_map[i]);
+		i++;
+	}
 	setup_one_texture(root, root->we, &root->texture_left);
 	setup_one_texture(root, root->ea, &root->texture_right);
 	setup_one_texture(root, root->no, &root->texture_down);

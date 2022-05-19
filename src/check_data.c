@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/17 14:05:12 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:25:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ int    parse_color(char *path)
 
 void	stock_data(t_mlx *root)
 {
-	root->ceiling = parse_color(root->data_map[5]);
-	root->floor = parse_color(root->data_map[4]);
+	int	i;
+
+	i = 0;
+	while (root->data_map[i])
+	{
+		if (ft_strncmp(root->data_map[i], "C ", 2) == 0)
+			root->ceiling = parse_color(root->data_map[i]);
+		if (ft_strncmp(root->data_map[i], "F ", 2) == 0)
+			root->floor = parse_color(root->data_map[i]);
+		i++;
+	}
 }
