@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 18:05:36 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 19:12:09 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 	y = -1;
 	while (++y <= project->wall_top_pix)
 		my_mlx_pixel_put(img, i, y, root->ceiling);
+	free(root->texture);
 }
 
 // calcul la distance entre le player et la texture
@@ -98,4 +99,5 @@ void	generate_3d_projection(t_mlx *root)
 	}
 	mlx_put_image_to_window(root->mlx, root->mlx_win, img.img, 0, 0);
 	mlx_destroy_image(root->mlx, img.img);
+	free(root->project);
 }
