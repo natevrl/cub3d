@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 17:34:41 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 18:06:41 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@
 
 # define FLT_MAX 3.402823466e+38F
 # define TILE_SIZE 64
-// # define NUMBER_MAP_COLS 20
-// # define NUMBER_MAP_ROWS 13
-// # define WINDOW_WIDTH (NUMBER_MAP_COLS * TILE_SIZE)
-// # define WINDOW_HEIGHT (NUMBER_MAP_ROWS * TILE_SIZE)
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
 

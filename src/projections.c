@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 17:56:24 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 18:05:36 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 
 	root->texture = malloc(sizeof(t_img));
 	init_texture(root, &root->texture);
-	// printf("OOOOOOOOOOOOUI\n");
-		
 	y = project->wall_bot_pix;
 	while (++y <= WINDOW_HEIGHT)
 		my_mlx_pixel_put(img, i, y, root->floor);

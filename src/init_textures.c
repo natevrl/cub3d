@@ -16,7 +16,7 @@ void	setup_textures(t_mlx *root)
 	root->no = "textures/txt1.xpm";
 	root->so = "textures/mur64.xpm";
 	root->we = "textures/wall_wood.xpm";
-	root->ea = "textures/txt1.xpm";
+	root->ea = "textures/fire.xpm";
 	setup_one_texture(root, root->we, &root->texture_left);
 	setup_one_texture(root, root->ea, &root->texture_right);
 	setup_one_texture(root, root->no, &root->texture_down);
