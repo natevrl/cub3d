@@ -72,6 +72,7 @@ void	generate_3d_projection(t_mlx *root)
 	t_img		img;
 	t_project3d	project;
 
+	//printf("%p\n", root->mlx);
 	img.img = mlx_new_image(root->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);

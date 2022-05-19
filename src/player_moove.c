@@ -3,9 +3,9 @@
 
 int	press_actions(int keycode, t_mlx *root)
 {
+	//printf("%d, %d, %d\n", keycode, LEFT, LEFTA);
 	if (keycode == 65307)
 		mlx_loop_end(root->mlx);
-
 	if ((keycode == RIGHT || keycode == RIGHTA))
 		root->player->turn_direction += 1;
 		// root->player->x += 1;

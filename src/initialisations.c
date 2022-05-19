@@ -34,10 +34,10 @@ static void	init_struct(t_mlx *root, char *path)
 	root->win_width = WINDOW_WIDTH;
 	root->win_height = WINDOW_HEIGHT;
 	root->mlx = 0;
-	// root->texture_up = NULL;
-	// root->texture_down = NULL;
-	// root->texture_left = NULL;
-	// root->texture_right = NULL;
+	root->texture_up = NULL;
+	root->texture_down = NULL;
+	root->texture_left = NULL;
+	root->texture_right = NULL;
 }
 
 
@@ -94,7 +94,16 @@ int update_image(t_mlx *root)
 	return (1);
 }
 
+void	print_tab(t_mlx *root)
+{
+	int i = 0;
 
+	while (root->map[i])
+	{
+		printf("%s\n", root->map[i]);
+		i++;
+	}
+}
 
 void	game_driver(char *path)
 {
@@ -112,6 +121,7 @@ void	game_driver(char *path)
 	map_parsing(root, path);
 	map_parsing2(root);
 	setup_textures(root);
+	print_tab(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);
