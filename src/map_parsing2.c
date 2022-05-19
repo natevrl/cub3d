@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:52 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/18 15:01:44 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:05:00 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,17 @@ static void	set_space_and_1(t_mlx *root)
 			else if (root->map[i][j] == 'S' || root->map[i][j] == 'E'
 				|| root->map[i][j] == 'W' || root->map[i][j] == 'N')
 			{
+				if (root->map[i][j] == 'N')
+					root->player->rota_angle = 270 * (PI / 180);
+				else if (root->map[i][j] == 'S')
+					root->player->rota_angle = 90 * (PI / 180);
+				else if (root->map[i][j] == 'E')
+					root->player->rota_angle = (PI / 180);
+				else if (root->map[i][j] == 'W')
+					root->player->rota_angle = 180 * (PI / 180);
 				root->player->x = j;
 				root->player->y = i;
 				root->map_int[i][j] = 2;
-				root->player->orientation = root->map_int[i][j];
 			}
 			j++;
 		}
