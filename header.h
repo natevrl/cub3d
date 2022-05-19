@@ -6,7 +6,7 @@
 /*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 13:23:34 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/19 17:34:41 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ typedef struct s_mlx
 	void	*mlx_win;
 	t_img	*maps;
 	t_img	*player;
-	t_img	texture;
+	t_img	*texture;
 	t_project3d	*project;
 	t_rays 	*rays;
 	void	*texture_left;
@@ -222,7 +222,7 @@ void	free_tab_int(int **tab);
 
 
 void	generate_3d_projection(t_mlx *root);
-void	init_texture(t_mlx *root, t_img *texture);
+void	init_texture(t_mlx *root, t_img **texture);
 void	setup_textures(t_mlx *root);
 
 # ifndef BUFF_SIZE
