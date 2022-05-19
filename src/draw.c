@@ -60,7 +60,7 @@ void draw_player(t_mlx *root)
 	}
 	i = -1;
 	while (++i < 40)
-		my_mlx_pixel_put(root->maps, root->player->x + cos(root->player->rotation_angle) * i, root->player->y + sin(root->player->rotation_angle) * i, 0x00FF0000);
+		my_mlx_pixel_put(root->maps, root->player->x + cos(root->player->rota_angle) * i, root->player->y + sin(root->player->rota_angle) * i, 0x00FF0000);
 }
 
 void redraw(t_mlx *root)

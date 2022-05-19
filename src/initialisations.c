@@ -8,21 +8,12 @@ int	there_is_wall(t_mlx *root, float x, float y)
 
 	map_x = floor(x / TILE_SIZE);
 	map_y = floor(y / TILE_SIZE);
-	if ((x < 0 || x >= WINDOW_WIDTH) || (y < 0 || y >= WINDOW_HEIGHT))
+	if ((x < 0 || x >= (TILE_SIZE * root->x)) || (y < 0 || y >= (TILE_SIZE * root->y)))
 		return (TRUE);
 	if (root->map[map_y][map_x] != 0 && root->map[map_y][map_x] != '1')
 		return (FALSE);
 	return (TRUE);
 }
-
-// static void	malloc_struct(t_mlx *root)
-// {
-// 	root->maps = malloc(sizeof(t_img));
-// 	if (root->maps == 0)
-// 		malloc_error(root);
-// }
-
-
 
 
 static void	init_struct(t_mlx *root, char *path)
@@ -63,7 +54,8 @@ int	init_player(t_mlx *root, int x, int y)
 	root->pos_p_y = 0;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
-	player->rotation_angle = PI / 2;
+	player->pas_chasse = 0;
+	player->rota_angle = PI / 2;
 	player->walk_speed = 4;
 	player->turn_speed = 4 * (PI / 180);
 	root->player = player;
@@ -71,19 +63,19 @@ int	init_player(t_mlx *root, int x, int y)
 }
 
 
-void move_player(t_mlx *root)
-{
-	root->player->rotation_angle += root->player->turn_direction * root->player->turn_speed;
-    float move_step = root->player->walk_direction * root->player->walk_speed;
+// void move_player(t_mlx *root)
+// {
+// 	root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
+//     float move_step = root->player->walk_direction * root->player->walk_speed;
 
-    float new_x = root->player->x + cos(root->player->rotation_angle) * move_step;
-    float new_y = root->player->y + sin(root->player->rotation_angle) * move_step;
-	if (!there_is_wall(root, new_x, new_y))
-	{
-		root->player->x = new_x;
-		root->player->y = new_y;
-	}
-}
+//     float new_x = root->player->x + cos(root->player->rota_angle) * move_step;
+//     float new_y = root->player->y + sin(root->player->rota_angle) * move_step;
+// 	if (!there_is_wall(root, new_x, new_y))
+// 	{
+// 		root->player->x = new_x;
+// 		root->player->y = new_y;
+// 	}
+// }
 
 int update_image(t_mlx *root) 
 {
@@ -99,10 +91,7 @@ void	print_tab(t_mlx *root)
 	int i = 0;
 
 	while (root->map[i])
-	{
-		printf("%s\n", root->map[i]);
 		i++;
-	}
 }
 
 void	game_driver(char *path)

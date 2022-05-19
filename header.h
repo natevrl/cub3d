@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/18 14:26:20 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/19 13:23:34 by v3r              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 
 # define FLT_MAX 3.402823466e+38F
 # define TILE_SIZE 64
-# define NUMBER_MAP_COLS 20
-# define NUMBER_MAP_ROWS 13
-# define WINDOW_WIDTH (NUMBER_MAP_COLS * TILE_SIZE)
-# define WINDOW_HEIGHT (NUMBER_MAP_ROWS * TILE_SIZE)
-// # define WINDOW_WIDTH 1200
-// # define WINDOW_HEIGHT 800
+// # define NUMBER_MAP_COLS 20
+// # define NUMBER_MAP_ROWS 13
+// # define WINDOW_WIDTH (NUMBER_MAP_COLS * TILE_SIZE)
+// # define WINDOW_HEIGHT (NUMBER_MAP_ROWS * TILE_SIZE)
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 800
 
 # define FOV_ANGLE (60 * PI / 180)
 # define NUMBER_OF_RAYS WINDOW_WIDTH
@@ -77,18 +77,20 @@ typedef struct s_img
 	int				starting_position;
 	int				turn_direction; // -1 for left, +1 for right
 	int				walk_direction; // -1 for back, +1 for front
+	int				pas_chasse;
 	int				orientation;
-	float			rotation_angle;
+	float			rota_angle;
 	float			walk_speed;
 	float			turn_speed;
 	char			*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	int				texture_offset_x;
-	int				texture_offset_y;
+	int				txt_offset_x;
+	int				txt_offset_y;
 	int				*data_color_addr[4];
 }	t_img;
+
 
 typedef struct s_direction
 {
@@ -107,8 +109,8 @@ typedef struct s_direction
 	int facing_right;
 	int facing_left;
 	float hit_distance;
-	float x_to_check;
-	float y_to_check;
+	float xtocheck;
+	float ytocheck;
 } t_direction;
 
 
@@ -116,7 +118,7 @@ typedef struct s_project3d
 {
 	float	perp_distance;
 	float	projected_wall_h;
-	int		wall_strip_h;
+	int		wallstrip_h;
 	int		wall_top_pix;
 	int		wall_bot_pix;
 }		t_project3d;
@@ -155,6 +157,8 @@ typedef struct s_mlx
 	void	*mlx_win;
 	t_img	*maps;
 	t_img	*player;
+	t_img	texture;
+	t_project3d	*project;
 	t_rays 	*rays;
 	void	*texture_left;
 	void	*texture_right;
@@ -181,23 +185,15 @@ int     esc_code(int keycode, t_mlx *root);
 char	**fill_map(t_mlx *root);
 void	map_parsing2(t_mlx *root);
 int		flood_fill(t_mlx *root, int y, int x, int new_case);
-int	check_data(char **data);
-int    check_map(t_mlx *root, char **map);
+int		check_data(char **data);
+int		check_map(t_mlx *root, char **map);
 
 // player & detections
+void 	move_player(t_mlx *root);
 int		there_is_wall(t_mlx *root, float x, float y);
-void	compteur_de_pas(void);
-int		is_escape(t_mlx *root, int x, int y);
-void	is_collectible(t_mlx *root, int x, int y);
-int		is_enemies(t_mlx *root, int x, int y);
 int		press_actions(int keycode, t_mlx *root);
 int		release_actions(int keycode, t_mlx *root);
 int 	update_image(t_mlx *root);
-
-
-// put sprites
-int		put_wall(t_mlx *root, int x, int y);
-int		put_player(t_mlx *root, int x, int y);
 
 //error
 void	malloc_error(t_mlx *root);
@@ -213,6 +209,10 @@ int		data_error(t_mlx *root);
 // raycasting
 void render_rays(t_mlx *root);
 void raycast(t_mlx *root);
+void init_ray_pos(t_direction *pos, float ray_angle);
+float normalize_ray(float angle);
+void calcul_hit_distance(t_mlx *root, t_direction *horz, t_direction *vert);
+void find_smallest_hit_distance(t_rays *rays, t_direction *horz, t_direction *vert);
 
 //utils
 int		intstrlen(char *str);
