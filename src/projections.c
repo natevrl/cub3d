@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/20 13:33:34 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:04:59 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 		root->texture->txt_offset_x = (int)root->rays[i].wall_hit_x % TILE_SIZE;
 	while (++y <= project->wall_bot_pix)
 		setup_colors(root, img, y, i);
-	y = -1;
+	y = 0;
 	while (++y <= project->wall_top_pix)
 		my_mlx_pixel_put(img, i, y, root->ceiling);
 	// free(root->texture);
@@ -99,6 +99,6 @@ void	generate_3d_projection(t_mlx *root)
 	}
 	mlx_put_image_to_window(root->mlx, root->mlx_win, img.img, 0, 0);
 	mlx_destroy_image(root->mlx, img.img);
-	free(root->project);
+	// free(root->project);
 	root->project = NULL;
 }

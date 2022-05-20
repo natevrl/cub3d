@@ -50,32 +50,20 @@ int	init_player(t_mlx *root, int x, int y)
 	player->y = y;
 	player->height = 1;
 	player->width = 1;
-	root->pos_p_x = 0;
-	root->pos_p_y = 0;
+	root->pos_p_x = 1;
+	root->pos_p_y = 1;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
 	player->pas_chasse = 0;
 	player->rota_angle = 0;
-	player->walk_speed = 4;
-	player->turn_speed = 4 * (PI / 180);
+	player->walk_speed = 5;
+	player->turn_speed = 5 * (PI / 180);
 	root->player = player;
 	return (1);
 }
 
 
-// void move_player(t_mlx *root)
-// {
-// 	root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
-//     float move_step = root->player->walk_direction * root->player->walk_speed;
 
-//     float new_x = root->player->x + cos(root->player->rota_angle) * move_step;
-//     float new_y = root->player->y + sin(root->player->rota_angle) * move_step;
-// 	if (!there_is_wall(root, new_x, new_y))
-// 	{
-// 		root->player->x = new_x;
-// 		root->player->y = new_y;
-// 	}
-// }
 
 int update_image(t_mlx *root) 
 {
@@ -95,6 +83,8 @@ void	print_tab(t_mlx *root)
 		i++;
 }
 
+
+
 void	game_driver(char *path)
 {
 	t_mlx	*root;
@@ -112,6 +102,7 @@ void	game_driver(char *path)
 			WINDOW_HEIGHT, "cub3D");
 	setup_textures(root);
 	print_tab(root);
+	root->player->rota_angle += (root->player->turn_direction - 0.1) * root->player->turn_speed;
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);
