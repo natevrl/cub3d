@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:45:58 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/17 13:05:21 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:23:04 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	free_tab(char **tab)
 	free(tab);
 	tab = NULL;
 }
+
 
 void	free_tab_int(int **tab)
 {

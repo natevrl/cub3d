@@ -19,7 +19,6 @@ static void	kill_window(t_mlx *root)
 	}
 }
 
-
 void	kill_all(t_mlx *root)
 {
 	int i;
@@ -32,6 +31,10 @@ void	kill_all(t_mlx *root)
 			free(root->map[i]);
 		free(root->map);
 	}
+	free(root->ea);
+	free(root->so);
+	free(root->no);
+	free(root->we);
 	if (root->player)
 		free(root->player);
 	if (root->mlx)

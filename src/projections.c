@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/20 13:33:34 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:16:57 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 	y = -1;
 	while (++y <= project->wall_top_pix)
 		my_mlx_pixel_put(img, i, y, root->ceiling);
-	// free(root->texture);
+	free(root->texture);
 }
 
 // calcul la distance entre le player et la texture

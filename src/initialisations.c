@@ -25,10 +25,15 @@ static void	init_struct(t_mlx *root, char *path)
 	root->win_width = WINDOW_WIDTH;
 	root->win_height = WINDOW_HEIGHT;
 	root->mlx = 0;
+	root->mlx_win = NULL;
 	root->texture_up = NULL;
 	root->texture_down = NULL;
 	root->texture_left = NULL;
 	root->texture_right = NULL;
+	root->ea = NULL;
+	root->we = NULL;
+	root->so = NULL;
+	root->no = NULL;
 }
 
 
@@ -61,21 +66,6 @@ int	init_player(t_mlx *root, int x, int y)
 	root->player = player;
 	return (1);
 }
-
-
-// void move_player(t_mlx *root)
-// {
-// 	root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
-//     float move_step = root->player->walk_direction * root->player->walk_speed;
-
-//     float new_x = root->player->x + cos(root->player->rota_angle) * move_step;
-//     float new_y = root->player->y + sin(root->player->rota_angle) * move_step;
-// 	if (!there_is_wall(root, new_x, new_y))
-// 	{
-// 		root->player->x = new_x;
-// 		root->player->y = new_y;
-// 	}
-// }
 
 int update_image(t_mlx *root) 
 {
