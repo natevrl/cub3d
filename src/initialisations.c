@@ -111,7 +111,7 @@ void	game_driver(char *path)
 	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
 	setup_textures(root);
-	print_tab(root);
+	root->player->rota_angle += (root->player->turn_direction - 0.1) * root->player->turn_speed;
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press
 	mlx_hook(root->mlx_win, 3, 1L << 1, release_actions, root); // key release
 	mlx_loop_hook(root->mlx, update_image, root);
