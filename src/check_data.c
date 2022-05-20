@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/19 19:25:35 by marvin           ###   ########.fr       */
+/*   Updated: 2022/05/20 14:51:43 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,24 @@ static int	check_wall(char *info)
 {
 	char	**data;
 	int		fd;
+	int		i;
 
+	i = 0;
 	data = ft_split(info, '\n');
-	fd = open(data[0], O_RDONLY);
-	if (fd < 0)
+	while (data[i])
 	{
+		fd = open(data[i], O_RDONLY | O_RDWR);
+		if (fd < 0)
+		{
+			close(fd);
+			printf("Error\nFile %s : not found\n", data[i]);
+			free_tab(data);
+			return (1);
+		}
 		close(fd);
-		printf("Error\nFile %s : not found\n", data[0]);
-		free_tab(data);
-		return (1);
+		i++;
 	}
 	free_tab(data);
-	close(fd);
 	return (0);
 }
 
@@ -107,12 +113,18 @@ void	stock_data(t_mlx *root)
 	int	i;
 
 	i = 0;
+	if (tab_len(root->data_map) != 6)
+		data_error(root);
 	while (root->data_map[i])
 	{
 		if (ft_strncmp(root->data_map[i], "C ", 2) == 0)
-			root->ceiling = parse_color(root->data_map[i]);
-		if (ft_strncmp(root->data_map[i], "F ", 2) == 0)
-			root->floor = parse_color(root->data_map[i]);
+			root->ceiling = parse_color(root->data_map[i] + 2);
+		else if (ft_strncmp(root->data_map[i], "F ", 2) == 0)
+		{
+			root->floor = parse_color(root->data_map[i] + 2);
+		}
+		else if (root->data_map[i][1] == ' ')
+			data_error(root);
 		i++;
 	}
 }

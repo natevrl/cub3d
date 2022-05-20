@@ -83,6 +83,7 @@ int update_image(t_mlx *root)
 	generate_3d_projection(root);
 	move_player(root);
 	free(root->rays);
+	root->rays = NULL;
 	return (1);
 }
 
@@ -103,12 +104,12 @@ void	game_driver(char *path)
 		malloc_error(root);
 	init_struct(root, path);
 	root->mlx = mlx_init();
-	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "cub3D");
 	init_player(root, 0, 0);
 	map_parsing(root, path);
 	map_parsing2(root);
 	stock_data(root);
+	root->mlx_win = mlx_new_window(root->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "cub3D");
 	setup_textures(root);
 	print_tab(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, press_actions, root); // key press

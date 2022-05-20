@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 20:23:33 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/20 11:45:08 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	map_parsing(t_mlx *root, char *str)
 	char	*all_maps;
 	int		fd;
 
-	fd = open(str, O_RDONLY);
+	fd = open(str, O_RDONLY | O_RDWR);
+	if (fd < 0)
+		check_open_error(root, fd);
 	check_open_error(root, fd);
 	all_maps = take_data(root, fd);
 	buffer = get_next_line(fd);
