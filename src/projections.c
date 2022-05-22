@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/20 17:16:57 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:39:36 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	setup_colors(t_mlx *root, t_img *img, int y, int x)
 								((float)TILE_SIZE / root->project->wallstrip_h);
 	i = -1;
 	while (++i != 4)
-		texture_color_pixel[i] = root->texture->data_color_addr[i][(TILE_SIZE * root->texture->txt_offset_y) + root->texture->txt_offset_x];
+		texture_color_pixel[i] = root->texture->data_color_addr[i][(TILE_SIZE
+				* root->texture->txt_offset_y) + root->texture->txt_offset_x];
 	if (root->rays[x].was_hit_vertical && root->rays[x].is_ray_facing_right)
 		my_mlx_pixel_put(img, x, y, texture_color_pixel[0]);
 	else if (root->rays[x].was_hit_vertical && root->rays[x].is_ray_facing_left)

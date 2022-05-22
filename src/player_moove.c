@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_moove.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 13:50:41 by mderome           #+#    #+#             */
+/*   Updated: 2022/05/22 13:51:37 by mderome          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header.h"
 
-
-void move_player(t_mlx *root)
+void	move_player(t_mlx *root)
 {
-	float move_step;
-	float new_x;
-	float new_y;
-	
-	root->player->rota_angle += root->player->turn_direction * root->player->turn_speed;
+	float	move_step;
+	float	new_x;
+	float	new_y;
+
+	root->player->rota_angle += root->player->turn_direction
+		* root->player->turn_speed;
 	move_step = root->player->pas_chasse * root->player->walk_speed;
 	new_x = root->player->x - sin(root->player->rota_angle) * move_step;
 	new_y = root->player->y + cos(root->player->rota_angle) * move_step;
@@ -29,7 +40,6 @@ int	press_actions(int keycode, t_mlx *root)
 {
 	if (keycode == 65307)
 		mlx_loop_end(root->mlx);
-
 	if (keycode == RIGHTA)
 		root->player->turn_direction += 1;
 	if (keycode == LEFTA)

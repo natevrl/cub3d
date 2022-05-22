@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v3r <v3r@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:50:17 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/19 12:34:39 by v3r              ###   ########.fr       */
+/*   Updated: 2022/05/22 13:49:33 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header.h"
 
 // Increment xstep and ystep until we find a wall
 void	increment_until_wall(t_mlx *root, t_direction *pos, int flag)
 {
-	while ((pos->next_touch_x >= 0 && pos->next_touch_x <= root->x * TILE_SIZE) && \
-		(pos->next_touch_y >= 0 && pos->next_touch_y <= root->y * TILE_SIZE))
+	while ((pos->next_touch_x >= 0 && pos->next_touch_x <= root->x * TILE_SIZE)
+		&& (pos->next_touch_y >= 0 && pos->next_touch_y <= root->y * TILE_SIZE))
 	{
 		pos->xtocheck = pos->next_touch_x;
 		pos->ytocheck = pos->next_touch_y;

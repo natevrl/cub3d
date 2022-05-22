@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:54:48 by nbenhado          #+#    #+#             */
-/*   Updated: 2022/05/18 10:44:30 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/22 12:51:52 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		there_is_newline(char *str);
 char	*before_newline(char *str);
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 4096
 # endif
 
 #endif

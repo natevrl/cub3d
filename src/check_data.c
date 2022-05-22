@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/20 14:51:43 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/22 13:25:54 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static int	check_wall(char *info)
 	while (data[i])
 	{
 		fd = open(data[i], O_RDONLY | O_RDWR);
-		if (fd < 0)
+		if (fd < 0 || isnot_xpm(data[i] + 3))
 		{
 			close(fd);
-			printf("Error\nFile %s : not found\n", data[i]);
 			free_tab(data);
 			return (1);
 		}
@@ -76,12 +75,12 @@ int	check_data(char **data)
 		if (ftstrlen(info[0]) == 2)
 		{
 			if (check_wall(info[1]) != 0)
-				return (free_tab(info), 0);
+				return (free_tab(info), 1);
 		}
 		else if (ftstrlen(info[0]) == 1)
 		{
 			if (check_cf(info[1], info) != 0)
-				return (free_tab(info), 0);
+				return (free_tab(info), 1);
 		}
 		else
 			return (free_tab(info), 1);
@@ -91,21 +90,21 @@ int	check_data(char **data)
 	return (free_tab(info), 0);
 }
 
-int    parse_color(char *path)
+int	parse_color(char *path)
 {
-    int		r;
-    int		g;
-    int		b;
-    int		converted_color;
-    char	**color;
+	int		r;
+	int		g;
+	int		b;
+	int		converted_color;
+	char	**color;
 
-    color = ft_split(path, ',');
-    r = ft_atoi(color[0]);
-    g = ft_atoi(color[1]);
-    b = ft_atoi(color[2]);
+	color = ft_split(path, ',');
+	r = ft_atoi(color[0]);
+	g = ft_atoi(color[1]);
+	b = ft_atoi(color[2]);
 	free_tab(color);
-    converted_color = r << 16 | g << 8 | b;
-    return (converted_color);
+	converted_color = r << 16 | g << 8 | b;
+	return (converted_color);
 }
 
 void	stock_data(t_mlx *root)

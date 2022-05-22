@@ -3,39 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/20 17:25:23 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:31:36 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-static void	count_elements(t_mlx *root, char *buffer)
+void	count_elements(t_mlx *root, char *buffer)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	root->map = ft_split(buffer, '\n');
-	while (root->map[i])
+	while (root->map[++i])
 	{
 		j = 0;
 		while (root->map[i][j])
 		{
-			if (root->map[i][j] == 'N' || root->map[i][j] == 'S' || root->map[i][j] == 'E'
-				|| root->map[i][j] == 'W')
+			if (root->map[i][j] == 'N' || root->map[i][j] == 'S'
+				|| root->map[i][j] == 'E' || root->map[i][j] == 'W')
 			{
-				root->pos_p_x = 
-				root->pos_p_y = 
+				root->pos_p_x = i;
+				root->pos_p_y = j;
 				root->is_player++;
 			}
 			if (root->map[i][j] == '\n' || root->map[i][j] == '\0')
 				root->win_height++;
 			j++;
 		}
-		i++;
 	}
 	if (root->is_player != 1)
 		invalid_map_error(root, buffer);
@@ -102,21 +101,9 @@ void	map_parsing(t_mlx *root, char *str)
 	while (buffer != NULL)
 	{
 		all_maps = ftstrjoin(all_maps, buffer);
+		free(buffer);
 		buffer = get_next_line(fd);
 	}
 	all_maps = ftstrjoin(all_maps, buffer);
-	get_next_line(fd);
-	count_elements(root, all_maps);
-	if (check_data(root->data_map) != 0)
-	{
-		free(all_maps);
-		data_error(root);
-	}
-	if (check_map(root, root->map) != 0)
-	{
-		free(all_maps);
-		data_error(root);
-	}
-	free(all_maps);
-	close(fd);
+	return_map_parsing(root, all_maps, fd);
 }

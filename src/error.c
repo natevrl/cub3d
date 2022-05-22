@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:41:20 by nbenhado          #+#    #+#             */
-/*   Updated: 2022/05/09 18:41:30 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:39:06 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../header.h"
+#include "../header.h"
 
 void	malloc_error(t_mlx *root)
 {

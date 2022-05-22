@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:45:58 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/20 17:23:04 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:41:01 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
-
-void	free_tab_int(int **tab)
+void	free_tab_int(int **tab, t_mlx *root)
 {
 	int	i;
 
 	i = 0;
-	while (tab && tab[i])
+	while (i < root->y)
 	{
 		free(tab[i]);
 		tab[i] = NULL;
