@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/22 16:16:14 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:34:28 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@
 # define TILE_SIZE 64
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
-
-# define FOV_ANGLE (60 * PI / 180)
 # define NUMBER_OF_RAYS 1200
-
 # define FPS 30
-# define FRAME_TIME_LENGTH (1000 / FPS)
 # define PI 3.14159265
 # define DOUBLE_PI 6.28318530
 
@@ -137,8 +133,6 @@ typedef struct s_mlx
 	int			x;
 	int			y;
 	int			is_player;
-	int			win_height;
-	int			win_width;
 	int			ceiling;
 	int			floor;
 	void		*mlx;
@@ -159,7 +153,6 @@ typedef struct s_mlx
 }	t_mlx;
 
 // init
-void	init_img_test(t_mlx *root);
 void	game_driver(char *path);
 void	kill_all(t_mlx *root);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -167,10 +160,8 @@ void	init_struct(t_mlx *root, char *path);
 int		init_player(t_mlx *root, int x, int y);
 
 // map & parsing
-void	number_of(t_mlx *root, char *str);
 void	map_drawer(t_mlx *root);
 void	map_parsing(t_mlx *root, char *str);
-int		esc_code(int keycode, t_mlx *root);
 char	**fill_map(t_mlx *root);
 void	map_parsing2(t_mlx *root);
 int		flood_fill(t_mlx *root, int y, int x, int new_case);
@@ -193,8 +184,6 @@ void	malloc_error(t_mlx *root);
 void	invalid_map_error(t_mlx *root, char *str);
 void	check_open_error(t_mlx *root, int fd);
 void	check_read_error(t_mlx *root, int ret, char *str);
-int		walls_error(t_mlx *root, int line, char *gnl);
-int		line_bad_len(t_mlx *root, char *gnl);
 int		free_return(char *str);
 int		rgb_error(char **tab);
 int		data_error(t_mlx *root);

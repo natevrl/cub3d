@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/22 13:31:36 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:31:54 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ void	count_elements(t_mlx *root, char *buffer)
 				root->pos_p_y = j;
 				root->is_player++;
 			}
-			if (root->map[i][j] == '\n' || root->map[i][j] == '\0')
-				root->win_height++;
 			j++;
 		}
 	}
 	if (root->is_player != 1)
 		invalid_map_error(root, buffer);
-	root->win_width = ((i + 1) - root->win_height) / root->win_height;
 }
 
 static void	up_data(t_mlx *root, char *line)

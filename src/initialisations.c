@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:32:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 16:19:23 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:31:36 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	init_struct(t_mlx *root, char *path)
 	root->map = NULL;
 	root->data_map = NULL;
 	root->is_player = 0;
-	root->win_width = WINDOW_WIDTH;
-	root->win_height = WINDOW_HEIGHT;
 	root->mlx = 0;
 	root->mlx_win = NULL;
 	root->text_up = NULL;
