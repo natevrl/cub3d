@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 13:25:54 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:40:41 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ static int	check_wall(char *info)
 	while (data[i])
 	{
 		fd = open(data[i], O_RDONLY | O_RDWR);
-		if (fd < 0 || isnot_xpm(data[i] + 3))
+		if (fd < 0)
+		{
+			free_tab(data);
+			return (1);
+		}
+		else if (isnot_xpm(data[i] + 3))
 		{
 			close(fd);
 			free_tab(data);
