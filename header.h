@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/23 13:34:28 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:33:19 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	stock_data(t_mlx *root);
 int		isnot_xpm(char *str);
 void	return_map_parsing(t_mlx *root, char *all_maps, int fd);
 void	count_elements(t_mlx *root, char *buffer);
+void	check_data_map(t_mlx *root);
 
 // player & detections
 void	move_player(t_mlx *root);

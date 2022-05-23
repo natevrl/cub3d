@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/23 13:40:41 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:33:57 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_wall(char *info)
 			free_tab(data);
 			return (1);
 		}
-		else if (isnot_xpm(data[i] + 3))
+		if (isnot_xpm(data[i] + 3))
 		{
 			close(fd);
 			free_tab(data);
@@ -47,18 +47,19 @@ static int	check_cf(char *info, char **tab)
 	int		i;
 
 	i = 0;
-	data = ft_split(info + 2, ',');
+	(void)tab;
+	data = ft_split(info, ',');
 	if (tab_len(data) != 3)
 	{
 		free_tab(data);
-		return (rgb_error(tab));
+		return (1);
 	}
 	while (data && data[i])
 	{
 		if (ft_atoi(data[i]) < 0 || ft_atoi(data[i]) > 255)
 		{
 			free_tab(data);
-			return (rgb_error(tab));
+			return (1);
 		}
 		i++;
 	}
@@ -71,7 +72,7 @@ int	check_data(char **data)
 	char	**info;
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (!data)
 		return (1);
 	info = ft_split(data[0], ' ');

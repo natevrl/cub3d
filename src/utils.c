@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:06:01 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/22 13:31:39 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:42:52 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	return_map_parsing(t_mlx *root, char *all_maps, int fd)
 	if (check_map(root, root->map) != 0)
 	{
 		free(all_maps);
-		data_error(root);
+		invalid_map_error(root, NULL);
 	}
 	free(all_maps);
 	close(fd);

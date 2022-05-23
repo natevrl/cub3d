@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 22:41:09 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/23 13:38:13 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:29:15 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ void	map_parsing(t_mlx *root, char *str)
 	}
 	all_maps = ftstrjoin(all_maps, buffer);
 	return_map_parsing(root, all_maps, fd);
+	check_data_map(root);
 }

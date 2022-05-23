@@ -1,0 +1,11 @@
+NO ./textures/fire.xpm
+SO ./textures/mur64.xpm
+WE ./textures/wall_wood.xpm
+EA ./textures/txt1.xpm
+F 5,5,100
+C 5,5,100
+
+111
+101
+1N1
+111

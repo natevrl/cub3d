@@ -6,7 +6,7 @@
 /*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:44:19 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 13:45:14 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:33:35 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	isnot_cub(char *str)
 	size_t	begin;
 
 	begin = ft_strlen(str) - 4;
-	if (ft_strncmp(str + begin, ".cub", 4) != 0 || ft_strlen(str) == 4)
+	if (ft_strncmp(str + begin, ".cub", 5) != 0 || ft_strlen(str) == 4)
 		return (1);
 	return (0);
 }
@@ -27,7 +27,7 @@ int	isnot_xpm(char *str)
 	size_t	begin;
 
 	begin = ft_strlen(str) - 4;
-	if (ft_strncmp(str + begin, ".xpm", 4) != 0 || ft_strlen(str) == 4)
+	if (ft_strncmp(str + begin, ".xpm", 5) != 0 || ft_strlen(str) == 4)
 		return (1);
 	return (0);
 }
