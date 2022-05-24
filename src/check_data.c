@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:33:35 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/23 15:33:57 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 13:39:26 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ static int	check_cf(char *info, char **tab)
 	}
 	while (data && data[i])
 	{
+		if (str_is_num(data[i]))
+			return (free_tab(data), 1);
 		if (ft_atoi(data[i]) < 0 || ft_atoi(data[i]) > 255)
-		{
-			free_tab(data);
-			return (1);
-		}
+			return (free_tab(data), 1);
 		i++;
 	}
+	if (data[2][0] == '\n')
+		return (free_tab(data), 1);
 	free_tab(data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:33:44 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/23 15:43:12 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 14:03:17 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_map(t_mlx *root, char **map)
 		{
 			if (map[i][j] == ' ')
 				map[i][j] = '1';
-			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'N'
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'N'
 				&& map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E')
 				return (1);
 			j++;

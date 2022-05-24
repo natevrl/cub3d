@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:32:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/23 13:31:36 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 11:48:56 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_player(t_mlx *root, int x, int y)
 	player->pas_chasse = 0;
 	player->rota_angle = 0;
 	player->walk_speed = 4;
-	player->turn_speed = 4 * (PI / 180);
+	player->turn_speed = 4 * (M_PI / 180);
 	root->player = player;
 	return (1);
 }

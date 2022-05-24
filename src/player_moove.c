@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:50:41 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/23 12:25:31 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 11:58:33 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	move_player(t_mlx *root)
 		new_x = root->player->x + cos(root->player->rota_angle) * move_step;
 		new_y = root->player->y + sin(root->player->rota_angle) * move_step;
 	}
-	if (!there_is_wall(root, new_x, new_y))
-	{
+	if (!there_is_wall(root, new_x, root->player->y))
 		root->player->x = new_x;
+	if (!there_is_wall(root, root->player->x, new_y))
 		root->player->y = new_y;
-	}
 }
 
 int	press_actions(int keycode, t_mlx *root)

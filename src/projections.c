@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:39:18 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/22 13:39:36 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 14:04:59 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	render_colors(t_mlx *root, t_img *img, t_project3d *project, int i)
 		root->texture->txt_offset_x = (int)root->rays[i].wall_hit_x % TILE_SIZE;
 	while (++y <= project->wall_bot_pix)
 		setup_colors(root, img, y, i);
-	y = -1;
+	y = 0;
 	while (++y <= project->wall_top_pix)
 		my_mlx_pixel_put(img, i, y, root->ceiling);
 	free(root->texture);
@@ -70,7 +70,7 @@ void	projections(t_mlx *root, t_project3d **project, int i)
 	(*project)->perp_distance = root->rays[i].distance * \
 				cos(root->rays[i].ray_angle - root->player->rota_angle);
 	(*project)->projected_wall_h = (TILE_SIZE / (*project)->perp_distance) * \
-						((WINDOW_WIDTH / 2) / tan((120 * (PI / 180)) / 2));
+						((WINDOW_WIDTH / 2) / tan((120 * (M_PI / 180)) / 2));
 	(*project)->wallstrip_h = (int)(*project)->projected_wall_h;
 	(*project)->wall_top_pix = (WINDOW_HEIGHT / 2) - \
 											((*project)->wallstrip_h / 2);

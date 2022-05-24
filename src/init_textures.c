@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:55:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 13:58:26 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 13:42:55 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 void	setup_one_texture(t_mlx *root, char *path, void **direction)
 {
 	int	txtsize;
+	int	txtsize2;
 
 	txtsize = 64;
-	*direction = mlx_xpm_file_to_image(root->mlx, path, &txtsize, &txtsize);
-	if (!direction)
+	*direction = mlx_xpm_file_to_image(root->mlx, path, &txtsize, &txtsize2);
+	if (txtsize != 64 || txtsize2 != 64)
+	{
+		printf("Wrong size image\n");
+		kill_all(root);
+	}
+	if (!(*direction))
 		kill_all(root);
 }
 
@@ -50,16 +56,18 @@ void	setup_textures(t_mlx *root)
 	int	i;
 
 	i = 0;
-	while (root->data_map[i])
+	while (i < 4)
 	{
 		if (ft_strncmp(root->data_map[i], "NO ", 3) == 0)
 			root->no = take_path(root->data_map[i]);
-		if (ft_strncmp(root->data_map[i], "SO ", 3) == 0)
+		else if (ft_strncmp(root->data_map[i], "SO ", 3) == 0)
 			root->so = take_path(root->data_map[i]);
-		if (ft_strncmp(root->data_map[i], "EA ", 3) == 0)
+		else if (ft_strncmp(root->data_map[i], "EA ", 3) == 0)
 			root->ea = take_path(root->data_map[i]);
-		if (ft_strncmp(root->data_map[i], "WE ", 3) == 0)
+		else if (ft_strncmp(root->data_map[i], "WE ", 3) == 0)
 			root->we = take_path(root->data_map[i]);
+		else
+			data_error(root);
 		i++;
 	}
 	setup_one_texture(root, root->we, &root->text_left);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:52 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 13:43:47 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 12:39:30 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static int	find_bigger_len(char **map)
 static void	set_space_and_1_2(t_mlx *root, int i, int j)
 {
 	if (root->map[i][j] == 'N')
-		root->player->rota_angle = 270 * (PI / 180);
+		root->player->rota_angle = 270 * (M_PI / 180);
 	else if (root->map[i][j] == 'S')
-		root->player->rota_angle = 90 * (PI / 180);
+		root->player->rota_angle = 90 * (M_PI / 180);
 	else if (root->map[i][j] == 'E')
-		root->player->rota_angle = (PI / 180);
+		root->player->rota_angle = (M_PI / 180);
 	else if (root->map[i][j] == 'W')
-		root->player->rota_angle = 180 * (PI / 180);
+		root->player->rota_angle = 180 * (M_PI / 180);
 	root->player->x = j;
 	root->player->y = i;
 	root->map_int[i][j] = 2;
@@ -99,7 +99,10 @@ void	map_parsing2(t_mlx *root)
 	}
 	set_space_and_1(root);
 	if (flood_fill(root, root->player->y, root->player->x, 0))
+	{
+		free_tab_int(root->map_int, root);
 		invalid_map_error(root, NULL);
+	}
 	free_tab_int(root->map_int, root);
 	root->player->x = (root->player->x * TILE_SIZE) + (TILE_SIZE / 2);
 	root->player->y = (root->player->y * TILE_SIZE) + (TILE_SIZE / 2);

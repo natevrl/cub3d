@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/23 15:33:19 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 13:32:20 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HEADER_H
 
 # include <math.h>
+# include <limits.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -33,7 +34,7 @@
 # define WINDOW_HEIGHT 800
 # define NUMBER_OF_RAYS 1200
 # define FPS 30
-# define PI 3.14159265
+// # define M_PI 3.14159265
 # define DOUBLE_PI 6.28318530
 
 // code ascii des touches ZQSD (azerty)
@@ -172,6 +173,8 @@ int		isnot_xpm(char *str);
 void	return_map_parsing(t_mlx *root, char *all_maps, int fd);
 void	count_elements(t_mlx *root, char *buffer);
 void	check_data_map(t_mlx *root);
+void	protect_rays_error(t_mlx *root, t_direction *pos);
+int		str_is_num(char *str);
 
 // player & detections
 void	move_player(t_mlx *root);

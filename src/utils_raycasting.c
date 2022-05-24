@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_raycasting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:03:39 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/23 13:36:00 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 11:48:56 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	init_ray_pos(t_direction *pos, float ray_angle)
 	pos->wall_content = 0;
 	pos->wall_hit_x = 0;
 	pos->wall_hit_y = 0;
-	pos->facing_down = (ray_angle > 0 && ray_angle < PI);
+	pos->facing_down = (ray_angle > 0 && ray_angle < M_PI);
 	pos->facing_up = !pos->facing_down;
-	pos->facing_right = (ray_angle < 0.5 * PI || ray_angle > 1.5 * PI);
+	pos->facing_right = (ray_angle < 0.5 * M_PI || ray_angle > 1.5 * M_PI);
 	pos->facing_left = !pos->facing_right;
 }
 

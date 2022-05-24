@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:52:59 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/18 14:38:03 by mderome          ###   ########.fr       */
+/*   Updated: 2022/05/24 13:16:03 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_fail(t_mlx *root, int y, int x)
 {
-	if (y <= 0 || y >= root->y || x <= 0 || x >= root->x)
+	if (y <= 0 || y >= root->y - 1 || x <= 0 || x >= root->x - 1)
 		return (1);
 	if (y == 0 && root->map_int[y][x] == 2)
 		return (1);
@@ -30,11 +30,11 @@ int	change_case(t_mlx *root, int y, int x, int new_case)
 	int	ret;
 
 	ret = 0;
-	if (root->map_int[y][x] == new_case || root->map_int[y][x] == 1)
+	if ((root->map_int[y][x] == new_case) || (root->map_int[y][x] == 1))
 		return (0);
 	else if (check_fail(root, y, x))
 		return (1);
-	else
+	else if (root->map[y][x])
 	{
 		root->map_int[y][x] = new_case;
 		ret = change_case(root, y + 1, x, new_case);
