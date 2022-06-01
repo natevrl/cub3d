@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:27:17 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/23 15:42:19 by mderome          ###   ########.fr       */
+/*   Updated: 2022/06/01 16:59:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	data_error(t_mlx *root)
 {
-	perror("Error\nData error");
+	printf("Error\nData error.\n");
 	kill_all(root);
 	return (1);
 }
@@ -22,7 +22,7 @@ int	data_error(t_mlx *root)
 int	rgb_error(char **tab)
 {
 	(void)tab;
-	perror("Error\nRGB error");
+	printf("Error\nRGB error.\n");
 	return (1);
 }
 
@@ -34,13 +34,9 @@ void	check_data_map(t_mlx *root)
 	i = 0;
 	while (root->data_map[i])
 	{
-		j = 3;
-		while (root->data_map[i][j])
-		{
-			if (root->data_map[i][j] == ' ' || root->data_map[i][j] == '\t')
-				data_error(root);
-			j++;
-		}
+		j = ft_strlen(root->data_map[i]) - 2;
+		if (root->data_map[i][j] == ' ')
+			data_error(root);
 		i++;
 	}
 }

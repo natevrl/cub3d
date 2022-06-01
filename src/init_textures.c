@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:55:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/24 13:42:55 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:55:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	setup_textures(t_mlx *root)
 	}
 	setup_one_texture(root, root->we, &root->text_left);
 	setup_one_texture(root, root->ea, &root->text_right);
-	setup_one_texture(root, root->no, &root->text_down);
-	setup_one_texture(root, root->so, &root->text_up);
+	setup_one_texture(root, root->so, &root->text_down);
+	setup_one_texture(root, root->no, &root->text_up);
 }
 
 void	init_texture(t_mlx *root, t_img **texture)
