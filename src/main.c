@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:44:19 by mderome           #+#    #+#             */
-/*   Updated: 2022/06/01 16:10:02 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/02 11:43:42 by mderome          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	game_driver(char *path)
 	map_parsing(root, path);
 	map_parsing2(root);
 	stock_data(root);
-	//game_driver2(root);
+	game_driver2(root);
 }
 
 int	main(int ac, char **av)

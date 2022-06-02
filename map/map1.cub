@@ -1,7 +1,7 @@
-NO ./textures/fire.xpm 
-SO ./textures/mur64.xpm
-WE           ./textures/wall_wood.xpm
+NO ./textures/mur64.xpm
+SO                      ./textures/wall_wood.xpm
 F 0,0,255
+WE ./textures/fire.xpm
 EA ./textures/txt1.xpm
 
 C 0,255,0
