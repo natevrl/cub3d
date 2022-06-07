@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:49:49 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/22 13:59:27 by mderome          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:25:33 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	kill_all(t_mlx *root)
 	free(root->so);
 	free(root->no);
 	free(root->we);
+	if (root->map_int)
+		free_tab_int(root->map_int, root);
 	if (root->player)
 		free(root->player);
 	if (root->mlx)

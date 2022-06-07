@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:03:39 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/24 11:48:56 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:35:27 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ float	distance_between_points(float x1, float y1, float x2, float y2)
 void	init_ray_pos(t_direction *pos, float ray_angle)
 {
 	pos->found_wall = FALSE;
-	pos->wall_content = 0;
+	pos->wallcont = 0;
 	pos->wall_hit_x = 0;
 	pos->wall_hit_y = 0;
 	pos->facing_down = (ray_angle > 0 && ray_angle < M_PI);
@@ -59,14 +59,14 @@ void	find_smallest_hit_distance(t_rays *rays, t_direction *horz,
 	rays->distance = horz->hit_distance;
 	rays->wall_hit_x = horz->wall_hit_x;
 	rays->wall_hit_y = horz->wall_hit_y;
-	rays->wall_hit_content = horz->wall_content;
+	rays->wall_hit_content = horz->wallcont;
 	rays->was_hit_vertical = FALSE;
 	if (vert->hit_distance < horz->hit_distance)
 	{
 		rays->distance = vert->hit_distance;
 		rays->wall_hit_x = vert->wall_hit_x;
 		rays->wall_hit_y = vert->wall_hit_y;
-		rays->wall_hit_content = vert->wall_content;
+		rays->wall_hit_content = vert->wallcont;
 		rays->was_hit_vertical = TRUE;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:32:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/24 11:48:56 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:33:48 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	there_is_wall(t_mlx *root, float x, float y)
 	if ((x < 0 || x >= (TILE_SIZE * root->x)) || (y < 0
 			|| y >= (TILE_SIZE * root->y)))
 		return (TRUE);
-	if (root->map[map_y][map_x] != 0 && root->map[map_y][map_x] != '1')
+	if (root->map_int[map_y][map_x] != 1)
 		return (FALSE);
 	return (TRUE);
 }
@@ -30,6 +30,7 @@ int	there_is_wall(t_mlx *root, float x, float y)
 void	init_struct(t_mlx *root, char *path)
 {
 	root->path = path;
+	root->map_int = NULL;
 	root->map = NULL;
 	root->data_map = NULL;
 	root->is_player = 0;

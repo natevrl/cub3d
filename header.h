@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:41:43 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/24 13:32:20 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:35:27 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_img
 typedef struct s_direction
 {
 	int		found_wall;
-	int		wall_content;
+	int		wallcont;
 	float	wall_hit_x;
 	float	wall_hit_y;
 	float	xintercept;

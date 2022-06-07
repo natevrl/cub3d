@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:50:17 by v3r               #+#    #+#             */
-/*   Updated: 2022/05/24 14:05:29 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:35:27 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	increment_until_wall(t_mlx *root, t_direction *pos, int flag)
 			pos->wall_hit_x = pos->next_touch_x;
 			pos->wall_hit_y = pos->next_touch_y;
 			protect_rays_error(root, pos);
-			pos->wall_content = root->map[(int)floor(pos->ytocheck / TILE_SIZE)]
+			pos->wallcont = root->map_int[(int)floor(pos->ytocheck / TILE_SIZE)]
 			[(int)floor(pos->xtocheck / TILE_SIZE)];
 			pos->found_wall = TRUE;
 			break ;

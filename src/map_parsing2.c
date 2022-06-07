@@ -6,7 +6,7 @@
 /*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:52 by mderome           #+#    #+#             */
-/*   Updated: 2022/05/24 12:39:30 by nbenhado         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:36:14 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,8 @@ void	map_parsing2(t_mlx *root)
 	set_space_and_1(root);
 	if (flood_fill(root, root->player->y, root->player->x, 0))
 	{
-		free_tab_int(root->map_int, root);
 		invalid_map_error(root, NULL);
 	}
-	free_tab_int(root->map_int, root);
 	root->player->x = (root->player->x * TILE_SIZE) + (TILE_SIZE / 2);
 	root->player->y = (root->player->y * TILE_SIZE) + (TILE_SIZE / 2);
 }
