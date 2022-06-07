@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:55:57 by mderome           #+#    #+#             */
-/*   Updated: 2022/06/02 16:12:55 by mderome          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:43:37 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void	setup_textures(t_mlx *root)
 		i++;
 	}
 	setup_one_texture(root, root->no, &root->text_left);
-	setup_one_texture(root, root->so, &root->text_down);
+	setup_one_texture(root, root->ea, &root->text_down);
 	setup_one_texture(root, root->we, &root->text_up);
-	setup_one_texture(root, root->ea, &root->text_right);
+	setup_one_texture(root, root->so, &root->text_right);
 }
 
 void	init_texture(t_mlx *root, t_img **texture)
 {
-	(*texture)->data_color_addr[0] = (int *)mlx_get_data_addr(root->text_down, //pas touche
+	(*texture)->data_color_addr[0] = (int *)mlx_get_data_addr(root->text_down,
 			&(*texture)->bits_per_pixel,
 			&(*texture)->line_length, &(*texture)->endian);
 	(*texture)->data_color_addr[1] = (int *)mlx_get_data_addr(root->text_up,
@@ -85,7 +85,7 @@ void	init_texture(t_mlx *root, t_img **texture)
 	(*texture)->data_color_addr[2] = (int *)mlx_get_data_addr(root->text_left,
 			&(*texture)->bits_per_pixel, &(*texture)->line_length,
 			&(*texture)->endian);
-	(*texture)->data_color_addr[3] = (int *)mlx_get_data_addr(root->text_right,//pas touche
+	(*texture)->data_color_addr[3] = (int *)mlx_get_data_addr(root->text_right,
 			&(*texture)->bits_per_pixel, &(*texture)->line_length,
 			&(*texture)->endian);
 }
