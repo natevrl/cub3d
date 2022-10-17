@@ -69,7 +69,7 @@ int	init_player(t_mlx *root, int x, int y)
 	player->walk_direction = 0;
 	player->pas_chasse = 0;
 	player->rota_angle = 0;
-	player->walk_speed = 4;
+	player->walk_speed = 2;
 	player->turn_speed = 4 * (M_PI / 180);
 	root->player = player;
 	return (1);
