@@ -35,9 +35,3 @@ int	check_map(t_mlx *root, char **map)
 	}
 	return (0);
 }
-
-int	check_map(char **map)
-{
-	(void)map;
-	return (0);
-}

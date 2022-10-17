@@ -214,8 +214,6 @@ void	setup_textures(t_mlx *root);
 //utils_tab
 void	free_tab(char **tab);
 int		tab_len(char **tab);
-void	free_tab_int(int **tab);
-
 void	print_tab(char **tab);
 
 # ifndef BUFF_SIZE
