@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhado <nbenhado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mderome <mderome@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:33:44 by v3r               #+#    #+#             */
 /*   Updated: 2022/05/24 14:03:17 by nbenhado         ###   ########.fr       */
@@ -33,5 +33,11 @@ int	check_map(t_mlx *root, char **map)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	check_map(char **map)
+{
+	(void)map;
 	return (0);
 }

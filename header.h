@@ -211,6 +211,13 @@ void	generate_3d_projection(t_mlx *root);
 void	init_texture(t_mlx *root, t_img **texture);
 void	setup_textures(t_mlx *root);
 
+//utils_tab
+void	free_tab(char **tab);
+int		tab_len(char **tab);
+void	free_tab_int(int **tab);
+
+void	print_tab(char **tab);
+
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 10
 # endif
